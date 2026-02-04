@@ -8,10 +8,19 @@ const Navbar: React.FC = () => {
   const { t, language, setLanguage } = useLanguage();
 
   useEffect(() => {
+    let ticking = false;
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          setIsScrolled(window.scrollY > 20);
+          ticking = false;
+        });
+        ticking = true;
+      }
     };
-    window.addEventListener('scroll', handleScroll);
+    
+    // Add passive listener for better scroll performance
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -69,30 +78,31 @@ const Navbar: React.FC = () => {
   return (
     <>
       <nav 
-        className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] flex justify-center ${
+        className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] flex justify-center transform-gpu ${
           isScrolled ? 'py-4' : 'py-6 md:py-8 lg:py-10'
         }`}
       >
         <div 
+          style={{ willChange: 'width, background-color, padding, border-radius, box-shadow' }}
           className={`
-            transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] flex justify-between items-center
+            transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] flex justify-between items-center transform-gpu backface-hidden
             ${isScrolled 
-              ? 'w-[95%] md:w-[1100px] bg-white/90 backdrop-blur-2xl rounded-full px-8 pl-10 py-3 shadow-2xl border border-white/40 ring-1 ring-stone-900/5' 
-              : 'w-full max-w-7xl px-8 bg-transparent'
+              ? 'w-[95%] md:w-[1100px] bg-white/90 backdrop-blur-xl rounded-full px-6 md:px-8 md:pl-10 py-3 shadow-2xl border border-white/40 ring-1 ring-stone-900/5' 
+              : 'w-full max-w-7xl px-6 md:px-8 bg-transparent'
             }
           `}
         >
           {/* Logo Area */}
           <div 
             className={`relative cursor-pointer group flex items-center transition-all duration-500 overflow-hidden ${
-              isScrolled ? 'h-10 md:h-12 w-auto' : 'h-28 md:h-44 lg:h-56'
+              isScrolled ? 'h-10 md:h-12 w-auto' : 'h-20 md:h-44 lg:h-56'
             }`} 
             onClick={scrollToTop}
           >
             <img 
-              src="https://i.ibb.co/S75dKJg8/image.png" 
+              src="https://www.dropbox.com/scl/fi/l3geafbz8jfk165ngn5ic/image.png?rlkey=qtdnsxaolpo9fp2sagdhvpsmw&st=mem6g1ld&dl=1" 
               alt="Happy Feet Reflexology Logo" 
-              className={`h-full w-auto object-contain transition-all duration-700 ${
+              className={`h-full w-auto object-contain transition-all duration-700 transform-gpu ${
                 isScrolled ? 'brightness-100 hover:scale-105' : 'brightness-0 invert hover:scale-105'
               }`}
             />
@@ -185,7 +195,7 @@ const Navbar: React.FC = () => {
       {mobileMenuOpen && (
         <div className="fixed inset-0 bg-white z-[60] flex flex-col items-center justify-center gap-10 animate-fade-in md:hidden">
            <div className="h-40 mb-4">
-              <img src="https://i.ibb.co/S75dKJg8/image.png" alt="Logo" className="h-full w-auto" />
+              <img src="https://www.dropbox.com/scl/fi/l3geafbz8jfk165ngn5ic/image.png?rlkey=qtdnsxaolpo9fp2sagdhvpsmw&st=mem6g1ld&dl=1" alt="Logo" className="h-full w-auto" />
            </div>
            
            <div className="flex flex-col items-center gap-8">

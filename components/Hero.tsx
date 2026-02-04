@@ -26,7 +26,7 @@ const Hero: React.FC = () => {
       <div className="absolute inset-0 bg-gradient-to-t from-stone-950 via-transparent to-black/20 z-10" />
 
       {/* Background Video - Streamable Iframe */}
-      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none transform-gpu">
         <iframe
           src="https://streamable.com/e/heuy0z?autoplay=1&muted=1&nocontrols=1&loop=1"
           className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-90"

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Instagram, Facebook, Phone, MapPin, MessageSquare } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 
@@ -12,7 +12,7 @@ const Footer: React.FC = () => {
           
           <div className="space-y-8">
             <div className="h-20 md:h-24 inline-block">
-              <img src="https://i.ibb.co/S75dKJg8/image.png" alt="Happy Feet Reflexology Logo" className="h-full w-auto object-contain" />
+              <img src="https://www.dropbox.com/scl/fi/l3geafbz8jfk165ngn5ic/image.png?rlkey=qtdnsxaolpo9fp2sagdhvpsmw&st=mem6g1ld&dl=1" alt="Happy Feet Reflexology Logo" className="h-full w-auto object-contain" />
             </div>
             <p className="text-stone-400 text-sm max-w-xs leading-relaxed font-light">
               {t.footer.desc}

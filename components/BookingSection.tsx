@@ -238,7 +238,7 @@ const BookingSection: React.FC = () => {
             <div className="w-full lg:w-[45%] bg-stone-50 p-10 border-r border-stone-100 flex flex-col justify-between relative z-20 rounded-t-[2rem] lg:rounded-tr-none lg:rounded-l-[2rem]">
               <div>
                 <div className="h-16 mb-10">
-                  <img src="https://i.ibb.co/S75dKJg8/image.png" alt="Logo" className="h-full w-auto" />
+                  <img src="https://www.dropbox.com/scl/fi/l3geafbz8jfk165ngn5ic/image.png?rlkey=qtdnsxaolpo9fp2sagdhvpsmw&st=mem6g1ld&dl=1" alt="Logo" className="h-full w-auto" />
                 </div>
                 
                 <div className="space-y-6">
