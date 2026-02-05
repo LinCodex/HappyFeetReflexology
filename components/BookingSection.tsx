@@ -454,7 +454,7 @@ const BookingSection: React.FC<{ initialServiceId?: string | null }> = ({ initia
                             name="firstName"
                             value={guestDetails.firstName}
                             onChange={handleInputChange}
-                            className="w-full bg-stone-50 border border-stone-100 rounded-xl py-3 pl-11 pr-4 text-sm font-bold text-stone-800 focus:outline-none focus:ring-1 focus:ring-black placeholder-stone-300 transition-all"
+                            className="w-full bg-stone-50 border border-stone-100 rounded-xl py-3 pl-11 pr-4 text-base font-bold text-stone-800 focus:outline-none focus:ring-1 focus:ring-black placeholder-stone-300 transition-all"
                             placeholder="Jane"
                           />
                         </div>
@@ -466,7 +466,7 @@ const BookingSection: React.FC<{ initialServiceId?: string | null }> = ({ initia
                           name="lastName"
                           value={guestDetails.lastName}
                           onChange={handleInputChange}
-                          className="w-full bg-stone-50 border border-stone-100 rounded-xl py-3 px-4 text-sm font-bold text-stone-800 focus:outline-none focus:ring-1 focus:ring-black placeholder-stone-300 transition-all"
+                          className="w-full bg-stone-50 border border-stone-100 rounded-xl py-3 px-4 text-base font-bold text-stone-800 focus:outline-none focus:ring-1 focus:ring-black placeholder-stone-300 transition-all"
                           placeholder="Doe"
                         />
                       </div>
@@ -481,7 +481,7 @@ const BookingSection: React.FC<{ initialServiceId?: string | null }> = ({ initia
                           name="email"
                           value={guestDetails.email}
                           onChange={handleInputChange}
-                          className="w-full bg-stone-50 border border-stone-100 rounded-xl py-3 pl-11 pr-4 text-sm font-bold text-stone-800 focus:outline-none focus:ring-1 focus:ring-black placeholder-stone-300 transition-all"
+                          className="w-full bg-stone-50 border border-stone-100 rounded-xl py-3 pl-11 pr-4 text-base font-bold text-stone-800 focus:outline-none focus:ring-1 focus:ring-black placeholder-stone-300 transition-all"
                           placeholder="jane@example.com"
                         />
                       </div>
@@ -496,7 +496,7 @@ const BookingSection: React.FC<{ initialServiceId?: string | null }> = ({ initia
                           name="phone"
                           value={guestDetails.phone}
                           onChange={handleInputChange}
-                          className="w-full bg-stone-50 border border-stone-100 rounded-xl py-3 pl-11 pr-4 text-sm font-bold text-stone-800 focus:outline-none focus:ring-1 focus:ring-black placeholder-stone-300 transition-all"
+                          className="w-full bg-stone-50 border border-stone-100 rounded-xl py-3 pl-11 pr-4 text-base font-bold text-stone-800 focus:outline-none focus:ring-1 focus:ring-black placeholder-stone-300 transition-all"
                           placeholder="(555) 123-4567"
                         />
                       </div>
