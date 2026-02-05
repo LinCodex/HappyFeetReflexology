@@ -245,6 +245,6 @@ export const SERVICES: CategorizedService[] = [
     descriptionZh: "75分钟奢华护理，恢复肌肤弹性和深度保湿。",
     price: 118,
     duration: 75,
-    image: "https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?auto=format&fit=crop&q=80&w=800",
+    image: "/collagen-hydration.jpg",
   }
 ];
