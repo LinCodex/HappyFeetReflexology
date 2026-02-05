@@ -117,13 +117,13 @@ const Navbar: React.FC = () => {
   return (
     <>
       <nav
-        className={`fixed top-0 left-0 w-full z-50 md:transition-[padding] md:duration-500 md:ease-[cubic-bezier(0.4,0,0.2,1)] flex justify-center transform-gpu will-change-transform ${isScrolled ? 'py-4' : 'py-6 md:py-8 lg:py-10'
+        className={`fixed top-0 left-0 w-full z-50 pointer-events-none md:transition-[padding] md:duration-500 md:ease-[cubic-bezier(0.4,0,0.2,1)] flex justify-center transform-gpu will-change-transform ${isScrolled ? 'py-4' : 'py-6 md:py-8 lg:py-10'
           }`}
       >
         <div
           style={{ willChange: 'width, background-color, padding, border-radius, box-shadow' }}
           className={`
-            md:transition-[width,background-color,padding,border-radius,box-shadow,border] md:duration-500 md:ease-[cubic-bezier(0.4,0,0.2,1)] flex justify-between items-center transform-gpu backface-hidden translate-z-0
+            pointer-events-auto md:transition-[width,background-color,padding,border-radius,box-shadow,border] md:duration-500 md:ease-[cubic-bezier(0.4,0,0.2,1)] flex justify-between items-center transform-gpu backface-hidden translate-z-0
             ${isScrolled
               ? 'w-[95%] md:w-[1100px] bg-white/60 backdrop-blur-3xl rounded-full px-6 md:px-8 md:pl-10 py-3 shadow-2xl border border-white/40 ring-1 ring-white/10'
               : 'w-full max-w-7xl px-6 md:px-8 bg-transparent'

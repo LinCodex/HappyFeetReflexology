@@ -160,6 +160,7 @@ const BookingSection: React.FC<{ initialServiceId?: string | null }> = ({ initia
   const handleReset = () => {
     setStatus(BookingStatus.IDLE);
     setBookingStep(0);
+    // Reset guest details, including comments field
     setGuestDetails({ firstName: '', lastName: '', email: '', phone: '', comments: '' });
     setSelectedTime('');
   };
