@@ -326,14 +326,22 @@ const BookingSection: React.FC<{ initialServiceId?: string | null }> = ({ initia
                   <>
                     {/* MOBILE: Fixed Bottom Sheet (Outside Card Flow) */}
                     <div
-                      className="lg:hidden fixed inset-0 z-[60] bg-black/40 backdrop-blur-sm animate-fade-in touch-none"
+                      className="lg:hidden fixed inset-0 z-[60] bg-black/60 backdrop-blur-sm animate-fade-in touch-none"
                       onClick={() => setIsDropdownOpen(false)}
                     ></div>
-                    <div className="lg:hidden fixed bottom-0 left-0 w-full z-[70] bg-white rounded-t-3xl shadow-[0_-10px_40px_-15px_rgba(0,0,0,0.2)] max-h-[85vh] flex flex-col animate-[fadeInUp_0.3s_ease-out]">
-                      <div className="flex items-center justify-between p-6 border-b border-stone-100 shrink-0">
-                        <span className="font-serif text-xl text-stone-900">{t.booking.change}</span>
-                        <button onClick={() => setIsDropdownOpen(false)} className="p-2 bg-stone-100 rounded-full text-stone-600 hover:bg-stone-200">
-                          <X size={20} />
+                    <div className="lg:hidden fixed bottom-0 left-0 w-full z-[70] bg-white rounded-t-[2rem] shadow-[0_-10px_40px_-15px_rgba(0,0,0,0.3)] max-h-[85vh] flex flex-col animate-[fadeInUp_0.3s_ease-out] pb-safe">
+                      {/* Drag Handle */}
+                      <div className="w-full flex justify-center pt-3 pb-1" onClick={() => setIsDropdownOpen(false)}>
+                        <div className="w-12 h-1.5 bg-stone-200 rounded-full"></div>
+                      </div>
+
+                      <div className="flex items-center justify-between px-6 py-4 border-b border-stone-100 shrink-0">
+                        <span className="font-serif text-2xl text-stone-900">{t.booking.change}</span>
+                        <button
+                          onClick={() => setIsDropdownOpen(false)}
+                          className="w-8 h-8 flex items-center justify-center bg-stone-100 rounded-full text-stone-500 hover:bg-stone-200 transition-colors"
+                        >
+                          <X size={18} />
                         </button>
                       </div>
                       <div className="overflow-y-auto p-4 custom-scrollbar overscroll-contain">
