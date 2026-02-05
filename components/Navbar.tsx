@@ -92,7 +92,7 @@ const Navbar: React.FC = () => {
           className={`
             md:transition-[width,background-color,padding,border-radius,box-shadow,border] md:duration-500 md:ease-[cubic-bezier(0.4,0,0.2,1)] flex justify-between items-center transform-gpu backface-hidden translate-z-0
             ${isScrolled
-              ? 'w-[95%] md:w-[1100px] bg-white/95 backdrop-blur-md rounded-full px-6 md:px-8 md:pl-10 py-3 shadow-2xl border border-white/40 ring-1 ring-stone-900/5'
+              ? 'w-[95%] md:w-[1100px] bg-white/70 backdrop-blur-xl rounded-full px-6 md:px-8 md:pl-10 py-3 shadow-2xl border border-white/20 ring-1 ring-white/30'
               : 'w-full max-w-7xl px-6 md:px-8 bg-transparent'
             }
           `}
@@ -183,11 +183,11 @@ const Navbar: React.FC = () => {
           <div className="md:hidden flex items-center gap-4">
             <button
               onClick={toggleLanguage}
-              className={`p-2 rounded-full transition-colors font-bold text-xs uppercase tracking-widest ${isScrolled ? 'text-black bg-stone-100' : 'text-white bg-white/10'}`}
+              className={`w-12 h-12 flex items-center justify-center rounded-full transition-colors font-bold text-xs uppercase tracking-widest ${isScrolled ? 'text-black bg-stone-100' : 'text-white bg-white/10'}`}
             >
               {language === 'en' ? 'CN' : 'EN'}
             </button>
-            <button className={`p-3 rounded-full transition-colors ${isScrolled ? 'bg-stone-100 text-black' : 'bg-white/10 text-white'}`} onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
+            <button className={`w-12 h-12 flex items-center justify-center rounded-full transition-colors ${isScrolled ? 'bg-stone-100 text-black' : 'bg-white/10 text-white'}`} onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
               {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
           </div>
