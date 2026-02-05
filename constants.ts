@@ -231,7 +231,7 @@ export const SERVICES: CategorizedService[] = [
     descriptionZh: "75分钟密集面部护理，专注于毛孔健康和皮肤透亮。",
     price: 98,
     duration: 75,
-    image: "https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?auto=format&fit=crop&q=80&w=800",
+    image: "/deep-cleaning.jpg",
   },
 
   // --- Collagen Hydration ---
