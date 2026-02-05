@@ -84,13 +84,13 @@ const Navbar: React.FC = () => {
   return (
     <>
       <nav
-        className={`fixed top-0 left-0 w-full z-50 transition-[padding] duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] flex justify-center transform-gpu will-change-transform ${isScrolled ? 'py-4' : 'py-6 md:py-8 lg:py-10'
+        className={`fixed top-0 left-0 w-full z-50 md:transition-[padding] md:duration-500 md:ease-[cubic-bezier(0.4,0,0.2,1)] flex justify-center transform-gpu will-change-transform ${isScrolled ? 'py-4' : 'py-6 md:py-8 lg:py-10'
           }`}
       >
         <div
           style={{ willChange: 'width, background-color, padding, border-radius, box-shadow' }}
           className={`
-            transition-[width,background-color,padding,border-radius,box-shadow,border] duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] flex justify-between items-center transform-gpu backface-hidden translate-z-0
+            md:transition-[width,background-color,padding,border-radius,box-shadow,border] md:duration-500 md:ease-[cubic-bezier(0.4,0,0.2,1)] flex justify-between items-center transform-gpu backface-hidden translate-z-0
             ${isScrolled
               ? 'w-[95%] md:w-[1100px] bg-white/95 backdrop-blur-md rounded-full px-6 md:px-8 md:pl-10 py-3 shadow-2xl border border-white/40 ring-1 ring-stone-900/5'
               : 'w-full max-w-7xl px-6 md:px-8 bg-transparent'
@@ -99,14 +99,14 @@ const Navbar: React.FC = () => {
         >
           {/* Logo Area */}
           <div
-            className={`relative cursor-pointer group flex items-center transition-[height] duration-500 overflow-hidden ${isScrolled ? 'h-10 md:h-12 w-auto' : 'h-20 md:h-44 lg:h-56'
+            className={`relative cursor-pointer group flex items-center md:transition-[height] md:duration-500 overflow-hidden ${isScrolled ? 'h-10 md:h-12 w-auto' : 'h-20 md:h-44 lg:h-56'
               }`}
             onClick={scrollToTop}
           >
             <img
               src="/logo.png"
               alt="Happy Feet Reflexology Logo"
-              className={`h-full w-auto object-contain transition-all duration-700 transform-gpu ${isScrolled ? 'brightness-100 hover:scale-105' : 'brightness-0 invert hover:scale-105'
+              className={`h-full w-auto object-contain md:transition-all md:duration-700 transform-gpu ${isScrolled ? 'brightness-100 hover:scale-105' : 'brightness-0 invert hover:scale-105'
                 }`}
             />
           </div>
