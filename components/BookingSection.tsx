@@ -117,7 +117,7 @@ const BookingSection: React.FC<{ initialServiceId?: string | null }> = ({ initia
   const handlePrevMonth = () => setCurrentMonth(new Date(currentMonth.getFullYear(), currentMonth.getMonth() - 1));
   const handleNextMonth = () => setCurrentMonth(new Date(currentMonth.getFullYear(), currentMonth.getMonth() + 1));
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setGuestDetails(prev => ({
       ...prev,
@@ -126,10 +126,12 @@ const BookingSection: React.FC<{ initialServiceId?: string | null }> = ({ initia
   };
 
   const handleBooking = async () => {
-    console.log('Starting booking process...');
     setStatus(BookingStatus.CONFIRMING);
 
     try {
+      // Format time to remove seconds if present (e.g. "14:00:00" -> "14:00")
+      const formattedTime = selectedTime.split(':').slice(0, 2).join(':');
+
       // Prepare template parameters
       const templateParams = {
         to_name: "Happy Feet Admin",
@@ -137,21 +139,17 @@ const BookingSection: React.FC<{ initialServiceId?: string | null }> = ({ initia
         service_name: language === 'zh' ? selectedService.nameZh : selectedService.name,
         service_duration: selectedService.duration,
         booking_date: selectedDate,
-        booking_time: selectedTime,
+        booking_time: formattedTime,
         phone_number: guestDetails.phone,
         email_address: guestDetails.email,
-        customer_note: `New booking request for ${selectedDate} at ${selectedTime}. Phone: ${guestDetails.phone}`
+        customer_note: `Client Note: ${guestDetails.comments || 'None'}\n\nSystem Log:\nNew booking request for ${selectedDate} at ${selectedTime}. Phone: ${guestDetails.phone}`
       };
-
-      console.log('Sending email with params:', templateParams);
 
       // Send Email via EmailJS
       const response = await emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams, PUBLIC_KEY);
-      console.log('EmailJS Success:', response.status, response.text);
 
       setStatus(BookingStatus.SUCCESS);
     } catch (error) {
-      console.error('EmailJS Failed:', error);
       alert("Failed to send booking request. Please check console for details.");
       setStatus(BookingStatus.IDLE);
     }
@@ -533,10 +531,16 @@ const BookingSection: React.FC<{ initialServiceId?: string | null }> = ({ initia
                       </div>
                     </div>
 
-                    <div className="p-4 bg-pink-50/50 rounded-xl border border-pink-100 mt-2">
-                      <p className="text-xs text-stone-500 font-light leading-relaxed">
-                        <span className="font-bold text-pink-500">{t.booking.note_label}</span> {t.booking.note_text}
-                      </p>
+                    <div className="space-y-1">
+                      <label className="text-[10px] uppercase tracking-widest font-bold text-stone-400 pl-1">{language === 'zh' ? '留言 (選填)' : 'Comments (Optional)'}</label>
+                      <textarea
+                        name="comments"
+                        //@ts-ignore
+                        value={guestDetails.comments || ''}
+                        onChange={handleInputChange}
+                        placeholder={language === 'zh' ? '有什麼特別需要注意的嗎？' : 'Any special requests or injuries?'}
+                        className="w-full bg-stone-50 border border-stone-100 rounded-xl px-4 py-3 text-base text-stone-900 placeholder-stone-300 focus:outline-none focus:ring-1 focus:ring-black transition-all resize-none h-24 text-stone-900"
+                      />
                     </div>
                   </div>
                 )}
