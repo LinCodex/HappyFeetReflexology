@@ -208,8 +208,11 @@ const Navbar: React.FC = () => {
             >
               {language === 'en' ? 'CN' : 'EN'}
             </button>
-            <button className={`w-12 h-12 flex items-center justify-center rounded-full transition-colors ${isScrolled ? 'bg-stone-100 text-black' : 'bg-white/10 text-white'}`} onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
-              {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            <button
+              className={`w-12 h-12 flex items-center justify-center rounded-full transition-all duration-300 ${isScrolled ? 'bg-stone-100 text-black' : 'bg-white/10 text-white'} ${mobileMenuOpen ? 'opacity-0 pointer-events-none rotate-90 scale-50' : 'opacity-100 rotate-0 scale-100'}`}
+              onClick={() => setMobileMenuOpen(true)}
+            >
+              <Menu size={24} />
             </button>
           </div>
         </div>

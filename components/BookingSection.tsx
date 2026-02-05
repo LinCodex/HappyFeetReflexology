@@ -344,13 +344,13 @@ const BookingSection: React.FC<{ initialServiceId?: string | null }> = ({ initia
                           <X size={18} />
                         </button>
                       </div>
-                      <div className="overflow-y-auto custom-scrollbar overscroll-contain">
+                      <div className="overflow-y-auto overscroll-contain [&::-webkit-scrollbar]:hidden [-ms-overflow-style:'none'] [scrollbar-width:'none']">
                         <ServiceList />
                       </div>
                     </div>
 
                     {/* DESKTOP: Absolute Popover */}
-                    <div className="hidden lg:block absolute bottom-full mb-4 left-0 w-full bg-white border border-stone-200 shadow-[0_-10px_40px_-15px_rgba(0,0,0,0.1)] rounded-2xl max-h-[450px] overflow-y-auto z-50 animate-fade-in custom-scrollbar overscroll-contain">
+                    <div className="hidden lg:block absolute bottom-full mb-4 left-0 w-full bg-white border border-stone-200 shadow-[0_-10px_40px_-15px_rgba(0,0,0,0.1)] rounded-2xl max-h-[450px] overflow-y-auto z-50 animate-fade-in overscroll-contain [&::-webkit-scrollbar]:hidden [-ms-overflow-style:'none'] [scrollbar-width:'none']">
                       <ServiceList />
                     </div>
                   </>
