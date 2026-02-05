@@ -160,7 +160,7 @@ const BookingSection: React.FC<{ initialServiceId?: string | null }> = ({ initia
   const handleReset = () => {
     setStatus(BookingStatus.IDLE);
     setBookingStep(0);
-    setGuestDetails({ firstName: '', lastName: '', email: '', phone: '' });
+    setGuestDetails({ firstName: '', lastName: '', email: '', phone: '', comments: '' });
     setSelectedTime('');
   };
 
