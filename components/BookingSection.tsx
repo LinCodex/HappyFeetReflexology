@@ -47,11 +47,21 @@ const BookingSection: React.FC<{ initialServiceId?: string | null }> = ({ initia
 
   // New State for Multi-step Booking
   const [bookingStep, setBookingStep] = useState<0 | 1>(0); // 0: Date/Time, 1: Details
-  const [guestDetails, setGuestDetails] = useState({
+
+  interface GuestDetails {
+    firstName: string;
+    lastName: string;
+    email: string;
+    phone: string;
+    comments?: string;
+  }
+
+  const [guestDetails, setGuestDetails] = useState<GuestDetails>({
     firstName: '',
     lastName: '',
     email: '',
-    phone: ''
+    phone: '',
+    comments: ''
   });
 
   // Group services for the dropdown
@@ -535,7 +545,6 @@ const BookingSection: React.FC<{ initialServiceId?: string | null }> = ({ initia
                       <label className="text-[10px] uppercase tracking-widest font-bold text-stone-400 pl-1">{language === 'zh' ? '留言 (選填)' : 'Comments (Optional)'}</label>
                       <textarea
                         name="comments"
-                        //@ts-ignore
                         value={guestDetails.comments || ''}
                         onChange={handleInputChange}
                         placeholder={language === 'zh' ? '有什麼特別需要注意的嗎？' : 'Any special requests or injuries?'}
