@@ -313,7 +313,7 @@ const BookingSection: React.FC<{ initialServiceId?: string | null }> = ({ initia
                   <>
                     {/* MOBILE: Fixed Bottom Sheet (Outside Card Flow) */}
                     <div
-                      className="lg:hidden fixed inset-0 z-[60] bg-black/40 backdrop-blur-sm animate-fade-in"
+                      className="lg:hidden fixed inset-0 z-[60] bg-black/40 backdrop-blur-sm animate-fade-in touch-none"
                       onClick={() => setIsDropdownOpen(false)}
                     ></div>
                     <div className="lg:hidden fixed bottom-0 left-0 w-full z-[70] bg-white rounded-t-3xl shadow-[0_-10px_40px_-15px_rgba(0,0,0,0.2)] max-h-[85vh] flex flex-col animate-[fadeInUp_0.3s_ease-out]">
@@ -323,13 +323,13 @@ const BookingSection: React.FC<{ initialServiceId?: string | null }> = ({ initia
                           <X size={20} />
                         </button>
                       </div>
-                      <div className="overflow-y-auto p-4 custom-scrollbar">
+                      <div className="overflow-y-auto p-4 custom-scrollbar overscroll-contain">
                         <ServiceList />
                       </div>
                     </div>
 
-                    {/* DESKTOP: Absolute Popover (Inside Card, now allowed to overflow if needed, but styled to fit) */}
-                    <div className="hidden lg:block absolute bottom-full mb-4 left-0 w-full bg-white border border-stone-200 shadow-[0_-10px_40px_-15px_rgba(0,0,0,0.1)] rounded-2xl max-h-[450px] overflow-y-auto z-50 animate-fade-in custom-scrollbar">
+                    {/* DESKTOP: Absolute Popover */}
+                    <div className="hidden lg:block absolute bottom-full mb-4 left-0 w-full bg-white border border-stone-200 shadow-[0_-10px_40px_-15px_rgba(0,0,0,0.1)] rounded-2xl max-h-[450px] overflow-y-auto z-50 animate-fade-in custom-scrollbar overscroll-contain">
                       <ServiceList />
                     </div>
                   </>
