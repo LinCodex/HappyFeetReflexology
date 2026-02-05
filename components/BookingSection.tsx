@@ -26,6 +26,19 @@ const BookingSection: React.FC<{ initialServiceId?: string | null }> = ({ initia
     }
   }, [initialServiceId]);
 
+  // Scroll to top of section on success to prevent falling through to footer
+  React.useEffect(() => {
+    if (status === BookingStatus.SUCCESS) {
+      const element = document.getElementById('consultation');
+      if (element) {
+        // Use a slight timeout to ensure DOM update
+        setTimeout(() => {
+          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 100);
+      }
+    }
+  }, [status]);
+
   // New State for Multi-step Booking
   const [bookingStep, setBookingStep] = useState<0 | 1>(0); // 0: Date/Time, 1: Details
   const [guestDetails, setGuestDetails] = useState({
