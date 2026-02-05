@@ -52,10 +52,8 @@ const Services: React.FC = () => {
             const categoryImage = categoryServices[0].image;
             const isOpen = openCategory === category;
 
-            // Check for specific categories to render embeds
-            const isCombination = category === 'Combination' || category === '组合套餐';
-            const isFootReflexology = category === 'Foot Reflexology' || category === '足部反射疗法';
-            const isClassicalFacial = category === 'Classical Facial' || category === '经典面部护理';
+            // Left blank as variables are no longer needed
+
 
             return (
               <div key={category} className="border-b border-stone-200 last:border-0 group">
@@ -90,57 +88,21 @@ const Services: React.FC = () => {
                   <div className="overflow-hidden">
                     <div className="flex flex-col lg:flex-row gap-10 pt-4 px-2">
 
-                      {/* Left: Featured Image or Media */}
+                      {/* Left: Featured Image */}
                       <div className="w-full lg:w-5/12 shrink-0">
-                        {isCombination ? (
-                          <div className="w-full max-w-[470px] mx-auto lg:mx-0 rounded-3xl overflow-hidden shadow-2xl bg-black">
-                            <div style={{ position: 'relative', width: '100%', paddingBottom: '44.6429%' }}>
-                              <iframe
-                                src="https://iframely.net/1PUW1hPv?theme=light"
-                                style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', border: 0 }}
-                                allowFullScreen
-                                loading="lazy"
-                              />
-                            </div>
+                        <div className="relative aspect-[3/4] lg:aspect-[4/5] rounded-3xl overflow-hidden shadow-2xl">
+                          <img
+                            src={categoryImage}
+                            alt={category}
+                            className="w-full h-full object-cover animate-fade-in scale-105"
+                            loading="lazy"
+                            decoding="async"
+                          />
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+                          <div className="absolute bottom-6 left-6 text-white">
+                            <p className="font-serif text-2xl leading-none">{category}</p>
                           </div>
-                        ) : isFootReflexology ? (
-                          <div className="w-full rounded-3xl overflow-hidden shadow-2xl bg-white border border-stone-100">
-                            <div style={{ position: 'relative', width: '100%', paddingBottom: '60.2299%', paddingTop: '120px' }}>
-                              <iframe
-                                src="https://iframely.net/AQhQOMwv?theme=light"
-                                style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', border: 0 }}
-                                allowFullScreen
-                                loading="lazy"
-                              />
-                            </div>
-                          </div>
-                        ) : isClassicalFacial ? (
-                          <div className="w-full rounded-3xl overflow-hidden shadow-2xl bg-white border border-stone-100">
-                            <div style={{ position: 'relative', width: '100%', paddingBottom: '131.4758%' }}>
-                              <iframe
-                                src="https://iframely.net/IfSAcETv?theme=light"
-                                style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', border: 0 }}
-                                allowFullScreen
-                                loading="lazy"
-                              />
-                            </div>
-                          </div>
-                        ) : (
-                          <div className="relative aspect-[3/4] lg:aspect-[4/5] rounded-3xl overflow-hidden shadow-2xl">
-                            <img
-                              src={categoryImage}
-                              alt={category}
-                              className="w-full h-full object-cover animate-fade-in scale-105"
-                              loading="lazy"
-                              decoding="async"
-                            />
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
-                            <div className="absolute bottom-6 left-6 text-white">
-
-                              <p className="font-serif text-2xl leading-none">{category}</p>
-                            </div>
-                          </div>
-                        )}
+                        </div>
                       </div>
 
                       {/* Right: Service List */}
