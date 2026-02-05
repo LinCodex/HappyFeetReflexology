@@ -30,6 +30,18 @@ const Navbar: React.FC = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [mobileMenuOpen]);
+
   const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
     e.preventDefault();
     const element = document.getElementById(id);
@@ -92,7 +104,7 @@ const Navbar: React.FC = () => {
           className={`
             md:transition-[width,background-color,padding,border-radius,box-shadow,border] md:duration-500 md:ease-[cubic-bezier(0.4,0,0.2,1)] flex justify-between items-center transform-gpu backface-hidden translate-z-0
             ${isScrolled
-              ? 'w-[95%] md:w-[1100px] bg-white/70 backdrop-blur-xl rounded-full px-6 md:px-8 md:pl-10 py-3 shadow-2xl border border-white/20 ring-1 ring-white/30'
+              ? 'w-[95%] md:w-[1100px] bg-white/60 backdrop-blur-3xl rounded-full px-6 md:px-8 md:pl-10 py-3 shadow-2xl border border-white/40 ring-1 ring-white/10'
               : 'w-full max-w-7xl px-6 md:px-8 bg-transparent'
             }
           `}
