@@ -20,19 +20,18 @@ const Hero: React.FC = () => {
   };
 
   return (
-    <div className="relative w-full h-[100dvh] overflow-hidden bg-stone-900">
+    <div className="relative w-full h-[100svh] overflow-hidden bg-stone-900">
       {/* Overlay Gradient - Deep & Luxurious */}
       <div className="absolute inset-0 bg-black/40 z-10" />
       <div className="absolute inset-0 bg-gradient-to-t from-stone-950 via-transparent to-black/20 z-10" />
 
       {/* Background Video - Streamable Iframe */}
-      {/* Background Video - Streamable Iframe - HIDDEN FOR NOW
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none transform-gpu">
         <iframe
           src="https://streamable.com/e/heuy0z?autoplay=1&muted=1&nocontrols=1&loop=1"
           className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-90"
           allow="autoplay; fullscreen"
-          style={{ 
+          style={{
             border: 'none',
             // Logic to simulate object-fit: cover for a 16:9 iframe, zoomed in by ~15%
             width: '115vw',
@@ -42,7 +41,6 @@ const Hero: React.FC = () => {
           }}
         />
       </div>
-      */}
 
       {/* Content */}
       <div className="relative z-20 h-full max-w-[90rem] mx-auto px-6 md:px-12 flex flex-col justify-center">
