@@ -3,7 +3,7 @@ import { SERVICES, CategorizedService } from '../constants';
 import { Clock, ArrowRight, ChevronDown, Sparkles } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 
-const Services: React.FC = () => {
+const Services: React.FC<{ onServiceSelect?: (id: string) => void }> = ({ onServiceSelect }) => {
   const { t, language } = useLanguage();
 
   // Group services by category
@@ -22,19 +22,21 @@ const Services: React.FC = () => {
   // Set the first category as open by default so the page isn't empty
   const [openCategory, setOpenCategory] = useState<string | null>(categories[0]);
 
-  const scrollToSection = (e: React.MouseEvent, id: string) => {
-    e.preventDefault();
-    const element = document.getElementById(id);
-    if (element) {
-      const offset = 100;
-      const elementPosition = element.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.pageYOffset - offset;
-      window.scrollTo({ top: offsetPosition, behavior: "smooth" });
-    }
-  };
-
   const toggleCategory = (category: string) => {
     setOpenCategory(openCategory === category ? null : category);
+  };
+
+  const handleBookClick = (e: React.MouseEvent, id: string) => {
+    e.preventDefault();
+    if (onServiceSelect) {
+      onServiceSelect(id);
+    } else {
+      // Fallback if no prop provided
+      const element = document.getElementById('consultation');
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
   };
 
   return (
@@ -51,8 +53,6 @@ const Services: React.FC = () => {
             const categoryServices = groupedServices[category];
             const categoryImage = categoryServices[0].image;
             const isOpen = openCategory === category;
-
-            // Left blank as variables are no longer needed
 
 
             return (
@@ -132,7 +132,7 @@ const Services: React.FC = () => {
                                   </div>
                                 </div>
                                 <button
-                                  onClick={(e) => scrollToSection(e, 'consultation')}
+                                  onClick={(e) => handleBookClick(e, service.id)}
                                   className="w-10 h-10 rounded-full bg-stone-50 flex items-center justify-center text-stone-900 hover:bg-black hover:text-white transition-all shadow-sm"
                                 >
                                   <ArrowRight size={16} />

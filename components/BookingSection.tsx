@@ -4,7 +4,7 @@ import { BookingStatus } from '../types';
 import { CheckCircle, Loader2, ChevronLeft, ChevronRight, Clock, MapPin, ChevronDown, ChevronUp, User, Mail, Phone, Calendar, X } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 
-const BookingSection: React.FC = () => {
+const BookingSection: React.FC<{ initialServiceId?: string | null }> = ({ initialServiceId }) => {
   const [status, setStatus] = useState<BookingStatus>(BookingStatus.IDLE);
   const [selectedService, setSelectedService] = useState<CategorizedService>(SERVICES[2]); // Default to 1hr Foot
   const [selectedDate, setSelectedDate] = useState<string>(new Date().toISOString().split('T')[0]);
@@ -12,6 +12,19 @@ const BookingSection: React.FC = () => {
   const [currentMonth, setCurrentMonth] = useState(new Date());
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const { t, language } = useLanguage();
+
+  // Watch for external selection changes
+  React.useEffect(() => {
+    if (initialServiceId) {
+      const service = SERVICES.find(s => s.id === initialServiceId);
+      if (service) {
+        setSelectedService(service);
+        // Reset steps if we just switched service from the menu
+        setBookingStep(0);
+        setSelectedTime('');
+      }
+    }
+  }, [initialServiceId]);
 
   // New State for Multi-step Booking
   const [bookingStep, setBookingStep] = useState<0 | 1>(0); // 0: Date/Time, 1: Details

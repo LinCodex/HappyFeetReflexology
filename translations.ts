@@ -13,18 +13,18 @@ export const translations = {
       est: "Est. Old Bridge, NJ",
       happy: "Happy",
       feet: "Feet",
-      desc: "The premier sanctuary for scalp and foot reflexology.",
-      subDesc: "Restoring balance to the modern soul through the ancient art of healing. Experience ultimate renewal in a space designed for peace.",
+      desc: "Professional scalp and foot reflexology in Old Bridge.",
+      subDesc: "Relax and restore balance with our expert massage treatments. We provide a peaceful environment for you to unwind.",
       scroll: "Scroll Down"
     },
     about: {
-      quote: "\"Old Bridge's finest sanctuary for feet.\"",
-      customer: "Satisfied Regular",
-      badge: "Reflexology Masters",
-      title1: "Nurture Your Soul,",
-      title2: "One Step at a Time.",
-      p1: "Happy Feet is more than a spa; it's a specialized center dedicated to the profound impact of scalp and foot reflexology. Our practitioners use precise techniques to target pressure points that correspond to every organ and system in your body.",
-      p2: "Located in the heart of Old Bridge, NJ, we provide an escape from the daily noise, focusing on restoration through handcrafted treatments and essential detox sessions.",
+      quote: "\"Best foot massage in Old Bridge.\"",
+      customer: "Google Review",
+      badge: "Experienced Therapists",
+      title1: "Relax Your Body,",
+      title2: "Revitalize Your Sole.",
+      p1: "At Happy Feet Reflexology, we specialize in scalp and foot massage techniques that help relieve tension and improve circulation. Our practitioners use precise techniques to target pressure points that correspond to every organ and system in your body.",
+      p2: "Conveniently located in Old Bridge, NJ, we offer a quiet escape from your busy day. Our goal is to help you feel refreshed and energized through our dedicated treatments.",
       statTitle: "Recommended Locally",
       statSub: "Highly Rated in Old Bridge"
     },
@@ -50,7 +50,7 @@ export const translations = {
       email: "Email Address",
       phone: "Phone Number",
       note_label: "Note:",
-      note_text: "This is a reservation, we will contact you if it is confirmed.",
+      note_text: "This is a reservation request, we will contact you to confirm.",
       review: "Session Review",
       pick_time: "Pick a time to proceed",
       continue: "Continue",
@@ -66,13 +66,13 @@ export const translations = {
       book_another: "Book Another"
     },
     footer: {
-      desc: "Elevating the art of reflexology in Old Bridge, NJ. A dedicated sanctuary for restorative scalp and foot treatments.",
+      desc: "Providing professional reflexology and scalp treatments in Old Bridge, NJ.",
       connect: "Connect",
       hours: "Hours",
       mon_sat: "Mon – Sat",
       sun: "Sunday",
       priority: "Appointments Priority",
-      rights: "© 2024 Happy Feet Reflexology. Developed with Care."
+      rights: "© 2024 Happy Feet Reflexology. All rights reserved."
     }
   },
   zh: {
@@ -89,18 +89,18 @@ export const translations = {
       est: "新泽西州 Old Bridge",
       happy: "快乐",
       feet: "足道",
-      desc: "首屈一指的头疗与足部反射疗法圣地。",
-      subDesc: "通过古老的疗愈艺术恢复灵魂的平衡。在专为宁静设计的空间中体验极致的焕新。",
+      desc: "Old Bridge 专业头疗与足疗服务。",
+      subDesc: "通过专业的按摩服务放松身心，恢复平衡。我们为您提供宁静舒适的休息环境。",
       scroll: "向下滑动"
     },
     about: {
-      quote: "\"Old Bridge 最好的足疗圣地。\"",
-      customer: "忠实顾客",
-      badge: "反射疗法专家",
-      title1: "滋养您的灵魂，",
-      title2: "从脚下开始。",
-      p1: "Happy Feet 不仅仅是一个水疗中心；它是一个专注于头疗和足部反射疗法深远影响的专业中心。我们的技师使用精准的手法刺激对应身体各个器官和系统的穴位。",
-      p2: "位于新泽西州 Old Bridge 中心，我们为您提供远离日常喧嚣的避风港，专注于通过精心设计的疗程和排毒环节来恢复活力。",
+      quote: "\"Old Bridge 极好的按摩店。\"",
+      customer: "Google 评价",
+      badge: "经验丰富的技师",
+      title1: "放松身心，",
+      title2: "焕发活力。",
+      p1: "Happy Feet 提供专业的头疗和足部按摩服务，帮助您缓解压力，促进血液循环。我们的技师手法娴熟，精准按压穴位，通过经络调节身体健康。",
+      p2: "我们位于新泽西州 Old Bridge，交通便利。这里是您远离喧嚣、放松身心的理想去处，致力于让您在舒适的环境中重获活力。",
       statTitle: "本地推荐",
       statSub: "Old Bridge 高评分商家"
     },
@@ -142,13 +142,13 @@ export const translations = {
       book_another: "预约新的服务"
     },
     footer: {
-      desc: "提升新泽西州 Old Bridge 的反射疗法艺术。专注于恢复性头疗和足部护理的圣地。",
+      desc: "我们在新泽西州 Old Bridge 提供专业的反射疗法和头疗服务。",
       connect: "联系方式",
       hours: "营业时间",
       mon_sat: "周一 至 周六",
       sun: "周日",
       priority: "预约优先",
-      rights: "© 2024 Happy Feet Reflexology. 精心以此呈现。"
+      rights: "© 2024 Happy Feet Reflexology. 保留所有权利。"
     }
   }
 };
