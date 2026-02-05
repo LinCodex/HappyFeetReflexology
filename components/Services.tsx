@@ -5,7 +5,7 @@ import { useLanguage } from '../contexts/LanguageContext';
 
 const Services: React.FC = () => {
   const { t, language } = useLanguage();
-  
+
   // Group services by category
   const groupedServices = SERVICES.reduce((acc, service) => {
     // Determine category based on language
@@ -18,7 +18,7 @@ const Services: React.FC = () => {
   }, {} as Record<string, CategorizedService[]>);
 
   const categories = Object.keys(groupedServices);
-  
+
   // Set the first category as open by default so the page isn't empty
   const [openCategory, setOpenCategory] = useState<string | null>(categories[0]);
 
@@ -51,7 +51,7 @@ const Services: React.FC = () => {
             const categoryServices = groupedServices[category];
             const categoryImage = categoryServices[0].image;
             const isOpen = openCategory === category;
-            
+
             // Check for specific categories to render embeds
             const isCombination = category === 'Combination' || category === '组合套餐';
             const isFootReflexology = category === 'Foot Reflexology' || category === '足部反射疗法';
@@ -59,19 +59,19 @@ const Services: React.FC = () => {
 
             return (
               <div key={category} className="border-b border-stone-200 last:border-0 group">
-                
+
                 {/* Accordion Header */}
-                <button 
+                <button
                   onClick={() => toggleCategory(category)}
                   className="w-full py-8 md:py-10 flex items-center justify-between text-left focus:outline-none group-hover:bg-white/50 transition-colors rounded-2xl px-4 -mx-4"
                 >
                   <div className="flex items-center gap-6">
-                     <span className={`text-3xl md:text-5xl font-serif transition-colors duration-300 ${isOpen ? 'text-black' : 'text-stone-400 group-hover:text-stone-600'}`}>
-                       {category}
-                     </span>
-                     {isOpen && <span className="hidden md:inline-flex px-3 py-1 bg-pink-100 text-pink-600 text-[10px] uppercase font-bold tracking-widest rounded-full">{categoryServices.length} {t.services.options}</span>}
+                    <span className={`text-3xl md:text-5xl font-serif transition-colors duration-300 ${isOpen ? 'text-black' : 'text-stone-400 group-hover:text-stone-600'}`}>
+                      {category}
+                    </span>
+                    {isOpen && <span className="hidden md:inline-flex px-3 py-1 bg-pink-100 text-pink-600 text-[10px] uppercase font-bold tracking-widest rounded-full">{categoryServices.length} {t.services.options}</span>}
                   </div>
-                  
+
                   <div className={`
                     w-12 h-12 rounded-full border flex items-center justify-center transition-all duration-500
                     ${isOpen ? 'bg-black text-white border-black rotate-180 shadow-lg' : 'bg-transparent text-stone-300 border-stone-200 group-hover:border-stone-400 group-hover:text-stone-500'}
@@ -81,106 +81,111 @@ const Services: React.FC = () => {
                 </button>
 
                 {/* Accordion Content */}
-                <div 
+                <div
                   className={`
                     grid transition-[grid-template-rows] duration-500 ease-[cubic-bezier(0.4,0,0.2,1)]
                     ${isOpen ? 'grid-rows-[1fr] opacity-100 pb-12' : 'grid-rows-[0fr] opacity-0 pb-0'}
                   `}
                 >
-                   <div className="overflow-hidden">
-                     <div className="flex flex-col lg:flex-row gap-10 pt-4 px-2">
-                        
-                        {/* Left: Featured Image or Media */}
-                        <div className="w-full lg:w-5/12 shrink-0">
-                           {isCombination ? (
-                             <div className="w-full max-w-[470px] mx-auto lg:mx-0 rounded-3xl overflow-hidden shadow-2xl bg-black">
-                                <div style={{ position: 'relative', width: '100%', paddingBottom: '44.6429%' }}>
-                                  <iframe 
-                                    src="https://iframely.net/1PUW1hPv?theme=light" 
-                                    style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', border: 0 }} 
-                                    allowFullScreen
-                                  />
-                                </div>
-                             </div>
-                           ) : isFootReflexology ? (
-                             <div className="w-full rounded-3xl overflow-hidden shadow-2xl bg-white border border-stone-100">
-                                <div style={{ position: 'relative', width: '100%', paddingBottom: '60.2299%', paddingTop: '120px' }}>
-                                  <iframe 
-                                    src="https://iframely.net/AQhQOMwv?theme=light" 
-                                    style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', border: 0 }} 
-                                    allowFullScreen
-                                  />
-                                </div>
-                             </div>
-                           ) : isClassicalFacial ? (
-                             <div className="w-full rounded-3xl overflow-hidden shadow-2xl bg-white border border-stone-100">
-                                <div style={{ position: 'relative', width: '100%', paddingBottom: '131.4758%' }}>
-                                  <iframe 
-                                    src="https://iframely.net/IfSAcETv?theme=light" 
-                                    style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', border: 0 }} 
-                                    allowFullScreen
-                                  />
-                                </div>
-                             </div>
-                           ) : (
-                             <div className="relative aspect-[3/4] lg:aspect-[4/5] rounded-3xl overflow-hidden shadow-2xl">
-                                <img 
-                                  src={categoryImage} 
-                                  alt={category} 
-                                  className="w-full h-full object-cover animate-fade-in scale-105" 
-                                />
-                                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
-                                <div className="absolute bottom-6 left-6 text-white">
-                                   <div className="flex items-center gap-2 mb-2 text-pink-300">
-                                     <Sparkles size={16} />
-                                     <span className="text-[10px] uppercase tracking-widest font-bold">{t.services.recommended}</span>
-                                   </div>
-                                   <p className="font-serif text-2xl leading-none">{category}</p>
-                                </div>
-                             </div>
-                           )}
-                        </div>
+                  <div className="overflow-hidden">
+                    <div className="flex flex-col lg:flex-row gap-10 pt-4 px-2">
 
-                        {/* Right: Service List */}
-                        <div className="w-full lg:w-7/12 flex flex-col gap-4">
-                           {categoryServices.map((service, idx) => (
-                             <div 
-                               key={service.id} 
-                               className="bg-white p-6 rounded-2xl border border-stone-100 shadow-sm hover:shadow-md transition-shadow group/item"
-                               style={{ animationDelay: `${idx * 100}ms` }}
-                             >
-                               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                                  <div className="space-y-1">
-                                    <h4 className="text-lg font-bold text-stone-900 group-hover/item:text-pink-500 transition-colors">
-                                      {language === 'zh' ? service.nameZh : service.name}
-                                    </h4>
-                                    <p className="text-xs font-light text-stone-500 leading-relaxed max-w-sm">
-                                      {language === 'zh' ? service.descriptionZh : service.description}
-                                    </p>
-                                  </div>
-                                  
-                                  <div className="flex items-center justify-between sm:justify-end gap-6 min-w-[140px] pt-4 sm:pt-0 border-t sm:border-t-0 border-stone-50">
-                                     <div className="text-right">
-                                       <span className="block text-xl font-serif font-bold text-black">${service.price}{t.services.price}</span>
-                                       <div className="flex items-center gap-1 text-stone-400 justify-end">
-                                          <Clock size={10} />
-                                          <span className="text-[9px] font-bold uppercase tracking-widest">{service.duration}{t.services.duration}</span>
-                                       </div>
-                                     </div>
-                                     <button 
-                                        onClick={(e) => scrollToSection(e, 'consultation')}
-                                        className="w-10 h-10 rounded-full bg-stone-50 flex items-center justify-center text-stone-900 hover:bg-black hover:text-white transition-all shadow-sm"
-                                     >
-                                        <ArrowRight size={16} />
-                                     </button>
-                                  </div>
-                               </div>
-                             </div>
-                           ))}
-                        </div>
+                      {/* Left: Featured Image or Media */}
+                      <div className="w-full lg:w-5/12 shrink-0">
+                        {isCombination ? (
+                          <div className="w-full max-w-[470px] mx-auto lg:mx-0 rounded-3xl overflow-hidden shadow-2xl bg-black">
+                            <div style={{ position: 'relative', width: '100%', paddingBottom: '44.6429%' }}>
+                              <iframe
+                                src="https://iframely.net/1PUW1hPv?theme=light"
+                                style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', border: 0 }}
+                                allowFullScreen
+                                loading="lazy"
+                              />
+                            </div>
+                          </div>
+                        ) : isFootReflexology ? (
+                          <div className="w-full rounded-3xl overflow-hidden shadow-2xl bg-white border border-stone-100">
+                            <div style={{ position: 'relative', width: '100%', paddingBottom: '60.2299%', paddingTop: '120px' }}>
+                              <iframe
+                                src="https://iframely.net/AQhQOMwv?theme=light"
+                                style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', border: 0 }}
+                                allowFullScreen
+                                loading="lazy"
+                              />
+                            </div>
+                          </div>
+                        ) : isClassicalFacial ? (
+                          <div className="w-full rounded-3xl overflow-hidden shadow-2xl bg-white border border-stone-100">
+                            <div style={{ position: 'relative', width: '100%', paddingBottom: '131.4758%' }}>
+                              <iframe
+                                src="https://iframely.net/IfSAcETv?theme=light"
+                                style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', border: 0 }}
+                                allowFullScreen
+                                loading="lazy"
+                              />
+                            </div>
+                          </div>
+                        ) : (
+                          <div className="relative aspect-[3/4] lg:aspect-[4/5] rounded-3xl overflow-hidden shadow-2xl">
+                            <img
+                              src={categoryImage}
+                              alt={category}
+                              className="w-full h-full object-cover animate-fade-in scale-105"
+                              loading="lazy"
+                              decoding="async"
+                            />
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+                            <div className="absolute bottom-6 left-6 text-white">
+                              <div className="flex items-center gap-2 mb-2 text-pink-300">
+                                <Sparkles size={16} />
+                                <span className="text-[10px] uppercase tracking-widest font-bold">{t.services.recommended}</span>
+                              </div>
+                              <p className="font-serif text-2xl leading-none">{category}</p>
+                            </div>
+                          </div>
+                        )}
+                      </div>
 
-                     </div>
-                   </div>
+                      {/* Right: Service List */}
+                      <div className="w-full lg:w-7/12 flex flex-col gap-4">
+                        {categoryServices.map((service, idx) => (
+                          <div
+                            key={service.id}
+                            className="bg-white p-6 rounded-2xl border border-stone-100 shadow-sm hover:shadow-md transition-shadow group/item"
+                            style={{ animationDelay: `${idx * 100}ms` }}
+                          >
+                            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                              <div className="space-y-1">
+                                <h4 className="text-lg font-bold text-stone-900 group-hover/item:text-pink-500 transition-colors">
+                                  {language === 'zh' ? service.nameZh : service.name}
+                                </h4>
+                                <p className="text-xs font-light text-stone-500 leading-relaxed max-w-sm">
+                                  {language === 'zh' ? service.descriptionZh : service.description}
+                                </p>
+                              </div>
+
+                              <div className="flex items-center justify-between sm:justify-end gap-6 min-w-[140px] pt-4 sm:pt-0 border-t sm:border-t-0 border-stone-50">
+                                <div className="text-right">
+                                  <span className="block text-xl font-serif font-bold text-black">${service.price}{t.services.price}</span>
+                                  <div className="flex items-center gap-1 text-stone-400 justify-end">
+                                    <Clock size={10} />
+                                    <span className="text-[9px] font-bold uppercase tracking-widest">{service.duration}{t.services.duration}</span>
+                                  </div>
+                                </div>
+                                <button
+                                  onClick={(e) => scrollToSection(e, 'consultation')}
+                                  className="w-10 h-10 rounded-full bg-stone-50 flex items-center justify-center text-stone-900 hover:bg-black hover:text-white transition-all shadow-sm"
+                                >
+                                  <ArrowRight size={16} />
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+
+                    </div>
+                  </div>
                 </div>
 
               </div>

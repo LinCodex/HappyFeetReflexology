@@ -9,3 +9,4 @@
 - **2026-02-05**: Fixed mobile logo issue by serving locally. Optimized floating dock animations.
 - **2026-02-05**: Pushed all changes to GitHub `main` branch.
 - **2026-02-05**: Applied fixes for mobile jitter (scroll hysteresis, CSS optimization) and pushed to GitHub.
+- **2026-02-05**: Removed floating dock transition animations on mobile for instant state changes. Pushed to GitHub.
