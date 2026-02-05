@@ -344,7 +344,7 @@ const BookingSection: React.FC<{ initialServiceId?: string | null }> = ({ initia
                           <X size={18} />
                         </button>
                       </div>
-                      <div className="overflow-y-auto p-4 custom-scrollbar overscroll-contain">
+                      <div className="overflow-y-auto custom-scrollbar overscroll-contain">
                         <ServiceList />
                       </div>
                     </div>
