@@ -56,7 +56,7 @@ const Hero: React.FC = () => {
           </div>
 
           {/* Title */}
-          <h1 className="text-7xl md:text-9xl lg:text-[11rem] text-white font-serif mb-10 leading-[0.8] tracking-tight animate-fade-in-up delay-100 drop-shadow-2xl">
+          <h1 className="text-7xl md:text-9xl lg:text-[11rem] text-white font-serif mb-10 leading-tight md:leading-[0.8] tracking-tight animate-fade-in-up delay-100 drop-shadow-2xl">
             {t.hero.happy} <br />
             <span className="relative inline-block ml-16 md:ml-40">
               <span className="relative z-10 font-serif italic text-pink-50/95 font-light">{t.hero.feet}</span>
