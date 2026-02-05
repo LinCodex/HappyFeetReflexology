@@ -19,7 +19,7 @@ export const SERVICES: CategorizedService[] = [
     descriptionZh: "专注于足部和小腿关键压力释放点的放松疗程。",
     price: 40,
     duration: 30,
-    image: "https://i.ibb.co/GffJnss7/uploads-abe8b6ac1b335500d861-uploads-ebe27b296916be3f30e4-c870x524.webp",
+    image: "/FootReflexology.png",
   },
   {
     id: "foot-45",
@@ -31,7 +31,7 @@ export const SERVICES: CategorizedService[] = [
     descriptionZh: "延长疗程，为足部和小腿提供深度放松。",
     price: 50,
     duration: 45,
-    image: "https://i.ibb.co/GffJnss7/uploads-abe8b6ac1b335500d861-uploads-ebe27b296916be3f30e4-c870x524.webp",
+    image: "/FootReflexology.png",
   },
   {
     id: "foot-60",
@@ -43,7 +43,7 @@ export const SERVICES: CategorizedService[] = [
     descriptionZh: "包含15分钟颈部、肩部、手臂和手部按摩。海盐足浴。45分钟小腿和足部反射疗法。",
     price: 55,
     duration: 60,
-    image: "https://i.ibb.co/GffJnss7/uploads-abe8b6ac1b335500d861-uploads-ebe27b296916be3f30e4-c870x524.webp",
+    image: "/FootReflexology.png",
   },
   {
     id: "foot-60-pro",
@@ -55,7 +55,7 @@ export const SERVICES: CategorizedService[] = [
     descriptionZh: "包含15分钟颈肩手臂按摩。手工乳木果和可可脂泡泡足浴。10分钟头皮按摩。",
     price: 65,
     duration: 60,
-    image: "https://i.ibb.co/GffJnss7/uploads-abe8b6ac1b335500d861-uploads-ebe27b296916be3f30e4-c870x524.webp",
+    image: "/FootReflexology.png",
   },
 
   // --- Scalp Treatment ---
@@ -69,7 +69,7 @@ export const SERVICES: CategorizedService[] = [
     descriptionZh: "基础头皮清洁与按摩仪式。",
     price: 65,
     duration: 45,
-    image: "https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&q=80&w=800",
+    image: "/ScalpTreatment.jpg",
   },
   {
     id: "scalp-60",
@@ -81,7 +81,7 @@ export const SERVICES: CategorizedService[] = [
     descriptionZh: "包括精油选择、头皮肩颈按摩、头皮清洁、手臂排毒反射疗法及面部清洁。",
     price: 79,
     duration: 60,
-    image: "https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&q=80&w=800",
+    image: "/ScalpTreatment.jpg",
   },
   {
     id: "scalp-75",
@@ -93,7 +93,7 @@ export const SERVICES: CategorizedService[] = [
     descriptionZh: "延长头皮护理，包含深层组织颈肩按摩。",
     price: 95,
     duration: 75,
-    image: "https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&q=80&w=800",
+    image: "/ScalpTreatment.jpg",
   },
   {
     id: "scalp-90",
@@ -105,7 +105,7 @@ export const SERVICES: CategorizedService[] = [
     descriptionZh: "极致头疗体验，包含全方位按摩和顶级护理。",
     price: 110,
     duration: 90,
-    image: "https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&q=80&w=800",
+    image: "/ScalpTreatment.jpg",
   },
 
   // --- Combination ---
@@ -119,7 +119,7 @@ export const SERVICES: CategorizedService[] = [
     descriptionZh: "30分钟肩颈 + 30分钟足疗。",
     price: 70,
     duration: 60,
-    image: "https://i.ibb.co/6c66HSkw/uploads-8820a2499cd6fc35f334-1759798457939.jpg",
+    image: "/combo.jpg",
   },
   {
     id: "combo-sf-90",
@@ -131,7 +131,7 @@ export const SERVICES: CategorizedService[] = [
     descriptionZh: "45分钟肩颈 + 45分钟足疗。",
     price: 105,
     duration: 90,
-    image: "https://i.ibb.co/6c66HSkw/uploads-8820a2499cd6fc35f334-1759798457939.jpg",
+    image: "/combo.jpg",
   },
   {
     id: "combo-scf-75",
@@ -143,7 +143,7 @@ export const SERVICES: CategorizedService[] = [
     descriptionZh: "45分钟头疗 + 30分钟足疗。",
     price: 95,
     duration: 75,
-    image: "https://i.ibb.co/6c66HSkw/uploads-8820a2499cd6fc35f334-1759798457939.jpg",
+    image: "/combo.jpg",
   },
   {
     id: "combo-scf-90-bal",
@@ -155,7 +155,7 @@ export const SERVICES: CategorizedService[] = [
     descriptionZh: "45分钟头疗 + 45分钟足疗。",
     price: 105,
     duration: 90,
-    image: "https://i.ibb.co/6c66HSkw/uploads-8820a2499cd6fc35f334-1759798457939.jpg",
+    image: "/combo.jpg",
   },
   {
     id: "combo-scf-90-focus",
@@ -167,7 +167,7 @@ export const SERVICES: CategorizedService[] = [
     descriptionZh: "60分钟头疗 + 30分钟足疗。",
     price: 110,
     duration: 90,
-    image: "https://i.ibb.co/6c66HSkw/uploads-8820a2499cd6fc35f334-1759798457939.jpg",
+    image: "/combo.jpg",
   },
   {
     id: "combo-scf-120",
@@ -179,7 +179,7 @@ export const SERVICES: CategorizedService[] = [
     descriptionZh: "60分钟头疗 + 60分钟足疗。",
     price: 129,
     duration: 120,
-    image: "https://i.ibb.co/6c66HSkw/uploads-8820a2499cd6fc35f334-1759798457939.jpg",
+    image: "/combo.jpg",
   },
 
   // --- Classical Facial ---
@@ -193,7 +193,7 @@ export const SERVICES: CategorizedService[] = [
     descriptionZh: "快速面部护理，让肌肤迅速焕发光彩。",
     price: 68,
     duration: 45,
-    image: "https://i.ibb.co/hxBPfKvH/uploads-f036c601881cb0fcc1c8-uploads-f1555a0a37b03b563797-Screenshot-2025-09-16-at-2-14-46-PM.png",
+    image: "/ClassicalFacial.jpg",
   },
   {
     id: "facial-60",
@@ -205,7 +205,7 @@ export const SERVICES: CategorizedService[] = [
     descriptionZh: "经典的护肤疗程，清洁、滋养并焕活肌肤。",
     price: 78,
     duration: 60,
-    image: "https://i.ibb.co/hxBPfKvH/uploads-f036c601881cb0fcc1c8-uploads-f1555a0a37b03b563797-Screenshot-2025-09-16-at-2-14-46-PM.png",
+    image: "/ClassicalFacial.jpg",
   },
   {
     id: "facial-90",
@@ -217,7 +217,7 @@ export const SERVICES: CategorizedService[] = [
     descriptionZh: "延长的面部护理，包含额外的按摩和高级面膜。",
     price: 115,
     duration: 90,
-    image: "https://i.ibb.co/hxBPfKvH/uploads-f036c601881cb0fcc1c8-uploads-f1555a0a37b03b563797-Screenshot-2025-09-16-at-2-14-46-PM.png",
+    image: "/ClassicalFacial.jpg",
   },
 
   // --- Deep Cleaning ---
@@ -231,7 +231,7 @@ export const SERVICES: CategorizedService[] = [
     descriptionZh: "75分钟密集面部护理，专注于毛孔健康和皮肤透亮。",
     price: 98,
     duration: 75,
-    image: "/deep-cleaning.jpg",
+    image: "/DeepCleaning.jpg",
   },
 
   // --- Collagen Hydration ---
@@ -245,6 +245,6 @@ export const SERVICES: CategorizedService[] = [
     descriptionZh: "75分钟奢华护理，恢复肌肤弹性和深度保湿。",
     price: 118,
     duration: 75,
-    image: "/collagen-hydration.jpg",
+    image: "/CollagenHydration.jpg",
   }
 ];
