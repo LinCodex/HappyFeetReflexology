@@ -51,6 +51,18 @@ const Navbar: React.FC = () => {
     };
   }, [mobileMenuOpen]);
 
+  // Close mobile menu on resize to desktop to prevent scroll lock
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 768) {
+        setMobileMenuOpen(false);
+      }
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
     e.preventDefault();
     const element = document.getElementById(id);

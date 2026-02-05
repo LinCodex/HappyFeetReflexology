@@ -3,6 +3,12 @@ import { SERVICES, CategorizedService } from '../constants';
 import { BookingStatus } from '../types';
 import { CheckCircle, Loader2, ChevronLeft, ChevronRight, Clock, MapPin, ChevronDown, ChevronUp, User, Mail, Phone, Calendar, X } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
+import emailjs from '@emailjs/browser';
+
+// EmailJS Config
+const SERVICE_ID = "service_l8y1jlr";
+const TEMPLATE_ID = "template_dzyrezg";
+const PUBLIC_KEY = "_1cEnB8RnVwD4SCW-";
 
 const BookingSection: React.FC<{ initialServiceId?: string | null }> = ({ initialServiceId }) => {
   const [status, setStatus] = useState<BookingStatus>(BookingStatus.IDLE);
@@ -119,12 +125,36 @@ const BookingSection: React.FC<{ initialServiceId?: string | null }> = ({ initia
     }));
   };
 
-  const handleBooking = () => {
+  const handleBooking = async () => {
+    console.log('Starting booking process...');
     setStatus(BookingStatus.CONFIRMING);
-    setTimeout(() => {
+
+    try {
+      // Prepare template parameters
+      const templateParams = {
+        to_name: "Happy Feet Admin",
+        from_name: `${guestDetails.firstName} ${guestDetails.lastName}`,
+        service_name: language === 'zh' ? selectedService.nameZh : selectedService.name,
+        service_duration: selectedService.duration,
+        booking_date: selectedDate,
+        booking_time: selectedTime,
+        phone_number: guestDetails.phone,
+        email_address: guestDetails.email,
+        customer_note: `New booking request for ${selectedDate} at ${selectedTime}. Phone: ${guestDetails.phone}`
+      };
+
+      console.log('Sending email with params:', templateParams);
+
+      // Send Email via EmailJS
+      const response = await emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams, PUBLIC_KEY);
+      console.log('EmailJS Success:', response.status, response.text);
+
       setStatus(BookingStatus.SUCCESS);
-      // Do not reset state here so the success screen can show details
-    }, 2000);
+    } catch (error) {
+      console.error('EmailJS Failed:', error);
+      alert("Failed to send booking request. Please check console for details.");
+      setStatus(BookingStatus.IDLE);
+    }
   };
 
   const handleReset = () => {
