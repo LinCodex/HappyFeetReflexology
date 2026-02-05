@@ -147,8 +147,8 @@ const BookingSection: React.FC<{ initialServiceId?: string | null }> = ({ initia
         to_name: "Happy Feet Admin",
         from_name: `${guestDetails.firstName} ${guestDetails.lastName}`,
         service_name: language === 'zh' ? selectedService.nameZh : selectedService.name,
-        service_duration: selectedService.duration,
-        booking_date: selectedDate,
+        service_duration: `${selectedService.duration} minutes`,
+        booking_date: selectedDate.split('-').slice(1).concat(selectedDate.split('-')[0]).join('-'), // YYYY-MM-DD -> MM-DD-YYYY
         booking_time: formattedTime,
         phone_number: guestDetails.phone,
         email_address: guestDetails.email,
@@ -213,7 +213,7 @@ const BookingSection: React.FC<{ initialServiceId?: string | null }> = ({ initia
               >
                 <div className="flex flex-col gap-1">
                   <span className={`font-serif text-base md:text-lg leading-none ${selectedService.id === s.id ? 'text-white' : 'text-stone-800'}`}>{language === 'zh' ? s.nameZh : s.name}</span>
-                  <span className={`text-[9px] uppercase tracking-widest font-bold ${selectedService.id === s.id ? 'text-stone-400' : 'text-stone-400 group-hover:text-pink-500'}`}>{s.duration} {t.services.duration}</span>
+                  <span className={`text-[10px] uppercase tracking-widest font-bold ${selectedService.id === s.id ? 'text-stone-400' : 'text-stone-400 group-hover:text-pink-500'}`}>{s.duration} {t.services.duration}</span>
                 </div>
                 <span className={`text-lg font-bold ${selectedService.id === s.id ? 'text-pink-300' : 'text-stone-900'}`}>${s.price}</span>
               </button>
@@ -336,7 +336,7 @@ const BookingSection: React.FC<{ initialServiceId?: string | null }> = ({ initia
               </div>
 
               <div className="mt-12 relative">
-                <span className="text-[9px] font-bold uppercase tracking-widest text-stone-400 block mb-3 pl-1">{t.booking.change}</span>
+                <span className="text-[10px] font-bold uppercase tracking-widest text-stone-400 block mb-3 pl-1">{t.booking.change}</span>
 
                 {/* Refined Dropdown Trigger */}
                 <button
@@ -347,7 +347,7 @@ const BookingSection: React.FC<{ initialServiceId?: string | null }> = ({ initia
                   `}
                 >
                   <div className="flex flex-col items-start gap-1">
-                    <span className="text-[9px] font-bold uppercase tracking-widest text-stone-400 group-hover:text-pink-500 transition-colors">{t.booking.current}</span>
+                    <span className="text-[10px] font-bold uppercase tracking-widest text-stone-400 group-hover:text-pink-500 transition-colors">{t.booking.current}</span>
                     <span className="text-lg font-serif text-stone-900 text-left line-clamp-1">
                       {language === 'zh' ? selectedService.nameZh : selectedService.name}
                     </span>
@@ -557,9 +557,9 @@ const BookingSection: React.FC<{ initialServiceId?: string | null }> = ({ initia
                 {/* Footer Confirmation */}
                 <div className="mt-auto pt-8 border-t border-stone-50 flex items-center justify-between">
                   <div className="flex flex-col">
-                    <span className="text-[9px] uppercase tracking-widest text-stone-400 font-bold">{t.booking.review}</span>
+                    <span className="text-[10px] uppercase tracking-widest text-stone-400 font-bold">{t.booking.review}</span>
                     <p className="text-black font-bold text-sm">
-                      {selectedTime ? `${selectedDate} at ${selectedTime}` : t.booking.pick_time}
+                      {selectedTime ? `${selectedDate.split('-').slice(1).concat(selectedDate.split('-')[0]).join('-')} at ${selectedTime}` : t.booking.pick_time}
                     </p>
                   </div>
 
