@@ -136,10 +136,7 @@ const Services: React.FC = () => {
                             />
                             <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
                             <div className="absolute bottom-6 left-6 text-white">
-                              <div className="flex items-center gap-2 mb-2 text-pink-300">
-                                <Sparkles size={16} />
-                                <span className="text-[10px] uppercase tracking-widest font-bold">{t.services.recommended}</span>
-                              </div>
+
                               <p className="font-serif text-2xl leading-none">{category}</p>
                             </div>
                           </div>
