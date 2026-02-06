@@ -95,12 +95,33 @@ const BookingSection: React.FC<{ initialServiceId?: string | null }> = ({ initia
     const lastStartHour = closeHour - 1;
 
     const slots = [];
+    const now = new Date();
+    const isToday = dateStr === now.toISOString().split('T')[0];
+
     for (let h = startHour; h <= lastStartHour; h++) {
       const period = h >= 12 ? 'PM' : 'AM';
       const displayH = h > 12 ? h - 12 : h === 12 ? 12 : h;
 
-      slots.push(`${displayH}:00 ${period}`);
-      slots.push(`${displayH}:30 ${period}`);
+      const time1 = `${displayH}:00 ${period}`;
+      const time2 = `${displayH}:30 ${period}`;
+
+      const checkTime = (t: string) => {
+        if (!isToday) return true;
+
+        let [timePart, periodPart] = t.split(' ');
+        let [hoursStr, minutesStr] = timePart.split(':');
+        let hours = parseInt(hoursStr);
+        if (periodPart === 'PM' && hours !== 12) hours += 12;
+        if (periodPart === 'AM' && hours === 12) hours = 0;
+
+        const slotDate = new Date(now);
+        slotDate.setHours(hours, parseInt(minutesStr), 0, 0);
+
+        return slotDate > now;
+      };
+
+      if (checkTime(time1)) slots.push(time1);
+      if (checkTime(time2)) slots.push(time2);
     }
     return slots;
   };
@@ -208,7 +229,8 @@ const BookingSection: React.FC<{ initialServiceId?: string | null }> = ({ initia
   };
 
   const isDetailsValid = () => {
-    return guestDetails.firstName && guestDetails.lastName && guestDetails.email && guestDetails.phone;
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return guestDetails.firstName && guestDetails.lastName && guestDetails.email && emailRegex.test(guestDetails.email) && guestDetails.phone;
   };
 
   const formatDateDisplay = (dateStr: string) => {
@@ -448,7 +470,13 @@ const BookingSection: React.FC<{ initialServiceId?: string | null }> = ({ initia
                         {t.booking.idle_title}
                       </h2>
                       <div className="flex items-center gap-4">
-                        <button onClick={handlePrevMonth} className="p-2 hover:bg-stone-50 rounded-full transition-colors"><ChevronLeft size={20} /></button>
+                        <button
+                          disabled={currentMonth.getFullYear() === new Date().getFullYear() && currentMonth.getMonth() === new Date().getMonth()}
+                          onClick={handlePrevMonth}
+                          className="p-2 hover:bg-stone-50 rounded-full transition-colors disabled:opacity-20 disabled:hover:bg-transparent"
+                        >
+                          <ChevronLeft size={20} />
+                        </button>
                         <span className="text-sm font-bold uppercase tracking-widest text-black">
                           {displayMonth}
                         </span>
@@ -479,14 +507,18 @@ const BookingSection: React.FC<{ initialServiceId?: string | null }> = ({ initia
                         const dateStr = day.toISOString().split('T')[0];
                         const isSelected = selectedDate === dateStr;
                         const isToday = new Date().toISOString().split('T')[0] === dateStr;
+                        const todayDate = new Date();
+                        todayDate.setHours(0, 0, 0, 0);
+                        const isPast = day < todayDate;
 
                         return (
                           <button
                             key={idx}
+                            disabled={isPast}
                             onClick={() => { setSelectedDate(dateStr); setSelectedTime(''); }}
                             className={`
                                 aspect-square rounded-xl text-sm font-bold transition-all flex items-center justify-center
-                                ${isSelected ? 'bg-black text-white shadow-lg' : 'hover:bg-pink-50 text-stone-800'}
+                                ${isSelected ? 'bg-black text-white shadow-lg' : isPast ? 'text-stone-300 cursor-not-allowed opacity-50' : 'hover:bg-pink-50 text-stone-800'}
                                 ${isToday && !isSelected ? 'text-pink-500 ring-1 ring-pink-100' : ''}
                               `}
                           >
