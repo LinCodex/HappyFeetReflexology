@@ -22,8 +22,9 @@ function doPost(e) {
         var timeStr = data.time; // HH:MM
         var duration = data.duration || "60";
 
-        // --- TITLE: [Name] [Time] ---
-        var title = customerName + " - " + timeStr;
+        // --- TITLE: [Name] - [Date] [Time] ---
+        // Example: "John Doe - 2023-10-27 14:30"
+        var title = customerName + " - " + dateStr + " " + timeStr;
 
         // --- NOTES ---
         var description = "Reservation Time: " + timeStr + "\n" +
@@ -34,10 +35,8 @@ function doPost(e) {
             "Note: " + customerNote;
 
         // --- DATE (All Day) ---
-        // Creating date object in local script timezone
-        // new Date("YYYY-MM-DD") creates UTC, which might show as previous day in PST.
-        // robust parsing:
         var parts = dateStr.split('-');
+        // Month is 0-indexed in JS Date
         var bookingDate = new Date(parts[0], parts[1] - 1, parts[2]);
 
         var cal = CalendarApp.getDefaultCalendar();
@@ -48,12 +47,14 @@ function doPost(e) {
             location: "Happy Feet Reflexology"
         });
 
-        // --- COLOR: Flamingo ---
-        event.setColor(CalendarApp.EventColor.FLAMINGO);
+        // --- COLOR: Flamingo (ID "4") ---
+        // "4" corresponds to the visible name "Flamingo" in Google Calendar UI.
+        event.setColor("4");
 
         return ContentService.createTextOutput(JSON.stringify({ status: "success" })).setMimeType(ContentService.MimeType.JSON);
 
     } catch (err) {
+        // Return error as success to avoid crashing the client, but log it effectively if possible
         return ContentService.createTextOutput(JSON.stringify({ status: "error", message: err.toString() })).setMimeType(ContentService.MimeType.JSON);
     }
 }

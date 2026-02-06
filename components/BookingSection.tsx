@@ -164,7 +164,7 @@ const BookingSection: React.FC<{ initialServiceId?: string | null }> = ({ initia
       await emailjs.send(SERVICE_ID, "template_syf1au2", templateParams, PUBLIC_KEY);
 
       // --- Google Calendar Integration ---
-      const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwKb2dJ8IayIeD4TvhyX0OFAMOrdMFyjs8s3WS_dkjJnxWiq-ICtStv6pCob6u4BZCvKQ/exec";
+      const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyHjLrBtCRdKnr-SFVPly6Whq-1zDcNuVUeJAvx180QlqDE8QrbRMxStXtAaQoOcl2m7w/exec";
 
       try {
         // We use no-cors mode because Google Apps Script responses are opaque in standard fetch 
