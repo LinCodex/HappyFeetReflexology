@@ -7,3 +7,9 @@
 
 ## Log
 - [x] Initialized team file.
+- [x] Updated `Footer.tsx` with new address and phone number.
+- [x] Updated `Navbar.tsx` with new phone links and map link.
+- [x] Updated `translations.ts` with new location info.
+- [x] Updated `BookingSection.tsx`, `QuickAccess.tsx`, `index.html`, and `metadata.json`.
+- [x] Verified all changes.
+- [x] Pushed changes to GitHub.

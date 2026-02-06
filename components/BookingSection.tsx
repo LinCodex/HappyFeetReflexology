@@ -155,8 +155,12 @@ const BookingSection: React.FC<{ initialServiceId?: string | null }> = ({ initia
         customer_note: `Client Note: ${guestDetails.comments || 'None'}\n\nSystem Log:\nNew booking request for ${selectedDate} at ${selectedTime}. Phone: ${guestDetails.phone}`
       };
 
-      // Send Email via EmailJS
-      const response = await emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams, PUBLIC_KEY);
+      // Send Admin Email
+      await emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams, PUBLIC_KEY);
+
+      // Send Customer Confirmation Email
+      // Using the same params is fine as the template handles the display
+      await emailjs.send(SERVICE_ID, "template_syf1au2", templateParams, PUBLIC_KEY);
 
       setStatus(BookingStatus.SUCCESS);
     } catch (error) {
