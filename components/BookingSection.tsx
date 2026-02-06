@@ -163,6 +163,35 @@ const BookingSection: React.FC<{ initialServiceId?: string | null }> = ({ initia
       // Using the same params is fine as the template handles the display
       await emailjs.send(SERVICE_ID, "template_syf1au2", templateParams, PUBLIC_KEY);
 
+      // --- Google Calendar Integration ---
+      const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwbu5cb7ENtBMZPMQJUsQYLhQTr9sAUJLc4fC9YbZJVWCFdWwv6bFfLBdCaWdTWfdMZrQ/exec";
+
+      try {
+        // We use no-cors mode because Google Apps Script responses are opaque in standard fetch 
+        // calls from the browser. This is a "fire and forget" request.
+        await fetch(GOOGLE_SCRIPT_URL, {
+          method: "POST",
+          mode: "no-cors",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            service_name: templateParams.service_name,
+            customer_name: templateParams.from_name,
+            customer_phone: templateParams.phone_number,
+            customer_email: templateParams.email_address,
+            customer_note: guestDetails.comments || "",
+            date: selectedDate, // YYYY-MM-DD
+            time: formattedTime, // HH:MM
+            duration: selectedService.duration
+          })
+        });
+        console.log("Calendar event request sent");
+      } catch (calError) {
+        console.error("Failed to add to calendar", calError);
+        // We do typically NOT want to fail the whole booking if just the calendar sync fails, so we swallow this error
+      }
+
       setStatus(BookingStatus.SUCCESS);
     } catch (error) {
       alert("Failed to send booking request. Please check console for details.");
