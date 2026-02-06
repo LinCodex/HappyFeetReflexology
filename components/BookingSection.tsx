@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { createPortal } from 'react-dom';
 import { SERVICES, CategorizedService } from '../constants';
 import { BookingStatus } from '../types';
 import { CheckCircle, Loader2, ChevronLeft, ChevronRight, Clock, MapPin, ChevronDown, ChevronUp, User, Mail, Phone, Calendar, X } from 'lucide-react';
@@ -368,29 +369,34 @@ const BookingSection: React.FC<{ initialServiceId?: string | null }> = ({ initia
                 {isDropdownOpen && (
                   <>
                     {/* MOBILE: Fixed Bottom Sheet (Outside Card Flow) */}
-                    <div
-                      className="lg:hidden fixed inset-0 z-[60] bg-black/60 backdrop-blur-sm animate-fade-in touch-none"
-                      onClick={() => setIsDropdownOpen(false)}
-                    ></div>
-                    <div className="lg:hidden fixed bottom-0 left-0 w-full z-[70] bg-white rounded-t-[2rem] shadow-[0_-10px_40px_-15px_rgba(0,0,0,0.3)] max-h-[85vh] flex flex-col animate-[fadeInUp_0.3s_ease-out] pb-safe">
-                      {/* Drag Handle */}
-                      <div className="w-full flex justify-center pt-3 pb-1" onClick={() => setIsDropdownOpen(false)}>
-                        <div className="w-12 h-1.5 bg-stone-200 rounded-full"></div>
-                      </div>
-
-                      <div className="flex items-center justify-between px-6 py-4 border-b border-stone-100 shrink-0">
-                        <span className="font-serif text-2xl text-stone-900">{t.booking.change}</span>
-                        <button
+                    {createPortal(
+                      <>
+                        <div
+                          className="lg:hidden fixed inset-0 z-[100] bg-black/60 backdrop-blur-sm animate-fade-in touch-none"
                           onClick={() => setIsDropdownOpen(false)}
-                          className="w-8 h-8 flex items-center justify-center bg-stone-100 rounded-full text-stone-500 hover:bg-stone-200 transition-colors"
-                        >
-                          <X size={18} />
-                        </button>
-                      </div>
-                      <div className="overflow-y-auto overscroll-contain [&::-webkit-scrollbar]:hidden [-ms-overflow-style:'none'] [scrollbar-width:'none']">
-                        <ServiceList />
-                      </div>
-                    </div>
+                        ></div>
+                        <div className="lg:hidden fixed bottom-0 left-0 w-full z-[110] bg-white rounded-t-[2rem] shadow-[0_-10px_40px_-15px_rgba(0,0,0,0.3)] max-h-[85vh] flex flex-col animate-[fadeInUp_0.3s_ease-out] pb-safe">
+                          {/* Drag Handle */}
+                          <div className="w-full flex justify-center pt-3 pb-1" onClick={() => setIsDropdownOpen(false)}>
+                            <div className="w-12 h-1.5 bg-stone-200 rounded-full"></div>
+                          </div>
+
+                          <div className="flex items-center justify-between px-6 py-4 border-b border-stone-100 shrink-0">
+                            <span className="font-serif text-2xl text-stone-900">{t.booking.change}</span>
+                            <button
+                              onClick={() => setIsDropdownOpen(false)}
+                              className="w-8 h-8 flex items-center justify-center bg-stone-100 rounded-full text-stone-500 hover:bg-stone-200 transition-colors"
+                            >
+                              <X size={18} />
+                            </button>
+                          </div>
+                          <div className="overflow-y-auto overscroll-contain [&::-webkit-scrollbar]:hidden [-ms-overflow-style:'none'] [scrollbar-width:'none']">
+                            <ServiceList />
+                          </div>
+                        </div>
+                      </>,
+                      document.body
+                    )}
 
                     {/* DESKTOP: Absolute Popover */}
                     <div className="hidden lg:block absolute bottom-full mb-4 left-0 w-full bg-white border border-stone-200 shadow-[0_-10px_40px_-15px_rgba(0,0,0,0.1)] rounded-2xl max-h-[450px] overflow-y-auto z-50 animate-fade-in overscroll-contain [&::-webkit-scrollbar]:hidden [-ms-overflow-style:'none'] [scrollbar-width:'none']">
@@ -591,7 +597,7 @@ const BookingSection: React.FC<{ initialServiceId?: string | null }> = ({ initia
           </>
         )}
       </div>
-    </section>
+    </section >
   );
 };
 
