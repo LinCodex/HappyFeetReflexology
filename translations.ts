@@ -10,23 +10,23 @@ export const translations = {
       story: "Our Story"
     },
     hero: {
-      est: "Est. Old Bridge, NJ",
+      est: "Est. Poughkeepsie, NY",
       happy: "Happy",
       feet: "Feet",
-      desc: "Professional scalp and foot reflexology in Old Bridge.",
+      desc: "Professional scalp and foot reflexology in Poughkeepsie.",
       subDesc: "Relax and restore balance with our expert massage treatments. We provide a peaceful environment for you to unwind.",
       scroll: "Scroll Down"
     },
     about: {
-      quote: "\"Best foot massage in Old Bridge.\"",
+      quote: "\"Best foot massage in Poughkeepsie.\"",
       customer: "Google Review",
       badge: "Experienced Therapists",
       title1: "Relax Your Body,",
       title2: "Revitalize Your Sole.",
       p1: "At Happy Feet Reflexology, we specialize in scalp and foot massage techniques that help relieve tension and improve circulation. Our practitioners use precise techniques to target pressure points that correspond to every organ and system in your body.",
-      p2: "Conveniently located in Old Bridge, NJ, we offer a quiet escape from your busy day. Our goal is to help you feel refreshed and energized through our dedicated treatments.",
+      p2: "Conveniently located in Poughkeepsie, NY, we offer a quiet escape from your busy day. Our goal is to help you feel refreshed and energized through our dedicated treatments.",
       statTitle: "Recommended Locally",
-      statSub: "Highly Rated in Old Bridge"
+      statSub: "Highly Rated in Poughkeepsie"
     },
     services: {
       menu: "Menu",
@@ -66,7 +66,7 @@ export const translations = {
       book_another: "Book Another"
     },
     footer: {
-      desc: "Providing professional reflexology and scalp treatments in Old Bridge, NJ.",
+      desc: "Providing professional reflexology and scalp treatments in Poughkeepsie, NY.",
       connect: "Connect",
       hours: "Hours",
       mon_sat: "Mon – Sat",
@@ -86,23 +86,23 @@ export const translations = {
       story: "品牌故事"
     },
     hero: {
-      est: "新泽西州 Old Bridge",
+      est: "纽约州 Poughkeepsie",
       happy: "快乐",
       feet: "足道",
-      desc: "Old Bridge 专业头疗与足疗服务。",
+      desc: "Poughkeepsie 专业头疗与足疗服务。",
       subDesc: "通过专业的按摩服务放松身心，恢复平衡。我们为您提供宁静舒适的休息环境。",
       scroll: "向下滑动"
     },
     about: {
-      quote: "\"Old Bridge 极好的按摩店。\"",
+      quote: "\"Poughkeepsie 极好的按摩店。\"",
       customer: "Google 评价",
       badge: "经验丰富的技师",
       title1: "放松身心，",
       title2: "焕发活力。",
       p1: "Happy Feet 提供专业的头疗和足部按摩服务，帮助您缓解压力，促进血液循环。我们的技师手法娴熟，精准按压穴位，通过经络调节身体健康。",
-      p2: "我们位于新泽西州 Old Bridge，交通便利。这里是您远离喧嚣、放松身心的理想去处，致力于让您在舒适的环境中重获活力。",
+      p2: "我们位于纽约州 Poughkeepsie，交通便利。这里是您远离喧嚣、放松身心的理想去处，致力于让您在舒适的环境中重获活力。",
       statTitle: "本地推荐",
-      statSub: "Old Bridge 高评分商家"
+      statSub: "Poughkeepsie 高评分商家"
     },
     services: {
       menu: "菜单",
@@ -142,7 +142,7 @@ export const translations = {
       book_another: "预约新的服务"
     },
     footer: {
-      desc: "我们在新泽西州 Old Bridge 提供专业的反射疗法和头疗服务。",
+      desc: "我们在纽约州 Poughkeepsie 提供专业的反射疗法和头疗服务。",
       connect: "联系方式",
       hours: "营业时间",
       mon_sat: "周一 至 周六",

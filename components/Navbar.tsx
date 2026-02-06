@@ -160,17 +160,17 @@ const Navbar: React.FC = () => {
             <div className="flex items-center gap-3 mx-6">
               <ActionButton
                 icon={Phone}
-                href="tel:7328383888"
+                href="tel:8455918888"
                 label={t.nav.call}
               />
               <ActionButton
                 icon={MessageSquare}
-                href="sms:9085705655"
+                href="sms:8455918888"
                 label={t.nav.text}
               />
               <ActionButton
                 icon={MapPin}
-                href="https://www.google.com/maps/dir/?api=1&destination=2040+US-9+S+Suite+2040-103,+Old+Bridge,+NJ+08857"
+                href="https://www.google.com/maps/dir/?api=1&destination=2521+B+South+Rd,+Poughkeepsie,+NY+12601"
                 label={t.nav.maps}
               />
               {/* Language Switcher */}
@@ -246,19 +246,19 @@ const Navbar: React.FC = () => {
 
           {/* Mobile Quick Actions */}
           <div className="flex items-center gap-6">
-            <a href="tel:7328383888" className="flex flex-col items-center gap-2 group">
+            <a href="tel:8455918888" className="flex flex-col items-center gap-2 group">
               <div className="w-14 h-14 rounded-full bg-stone-50 border border-stone-100 flex items-center justify-center text-stone-600 group-hover:bg-black group-hover:text-white transition-all">
                 <Phone size={20} />
               </div>
               <span className="text-[10px] uppercase tracking-widest font-bold text-stone-400">{t.nav.call}</span>
             </a>
-            <a href="sms:9085705655" className="flex flex-col items-center gap-2 group">
+            <a href="sms:8455918888" className="flex flex-col items-center gap-2 group">
               <div className="w-14 h-14 rounded-full bg-stone-50 border border-stone-100 flex items-center justify-center text-stone-600 group-hover:bg-black group-hover:text-white transition-all">
                 <MessageSquare size={20} />
               </div>
               <span className="text-[10px] uppercase tracking-widest font-bold text-stone-400">{t.nav.text}</span>
             </a>
-            <a href="https://www.google.com/maps/dir/?api=1&destination=2040+US-9+S+Suite+2040-103,+Old+Bridge,+NJ+08857" target="_blank" rel="noreferrer" className="flex flex-col items-center gap-2 group">
+            <a href="https://www.google.com/maps/dir/?api=1&destination=2521+B+South+Rd,+Poughkeepsie,+NY+12601" target="_blank" rel="noreferrer" className="flex flex-col items-center gap-2 group">
               <div className="w-14 h-14 rounded-full bg-stone-50 border border-stone-100 flex items-center justify-center text-stone-600 group-hover:bg-black group-hover:text-white transition-all">
                 <MapPin size={20} />
               </div>

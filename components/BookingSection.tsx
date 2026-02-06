@@ -329,7 +329,7 @@ const BookingSection: React.FC<{ initialServiceId?: string | null }> = ({ initia
                     </div>
                     <div className="flex items-center gap-2 text-stone-600 bg-white px-4 py-2 rounded-xl shadow-sm border border-stone-100">
                       <MapPin size={14} className="text-pink-400" />
-                      <span className="text-[10px] font-bold uppercase tracking-widest">Old Bridge</span>
+                      <span className="text-[10px] font-bold uppercase tracking-widest">Poughkeepsie</span>
                     </div>
                   </div>
                 </div>

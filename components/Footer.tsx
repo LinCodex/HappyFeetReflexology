@@ -24,15 +24,15 @@ const Footer: React.FC = () => {
             <div className="space-y-4 text-sm font-light text-stone-500">
               <div className="flex items-start gap-4">
                 <MapPin className="w-5 h-5 text-pink-400 mt-1 shrink-0" />
-                <p>2040 US-9 S Suite 2040-103<br />Old Bridge, NJ 08857</p>
+                <p>2521 B South Rd<br />Poughkeepsie, NY 12601</p>
               </div>
               <div className="flex items-center gap-4">
                 <Phone className="w-5 h-5 text-pink-400 shrink-0" />
-                <p className="tracking-widest">732.838.3888</p>
+                <p className="tracking-widest">845.591.8888</p>
               </div>
               <div className="flex items-center gap-4">
                 <MessageSquare className="w-5 h-5 text-pink-400 shrink-0" />
-                <p className="tracking-widest">908.570.5655 <span className="text-[10px] uppercase font-bold opacity-40 ml-2">({t.nav.text})</span></p>
+                <p className="tracking-widest">845.591.8888 <span className="text-[10px] uppercase font-bold opacity-40 ml-2">({t.nav.text})</span></p>
               </div>
             </div>
           </div>
