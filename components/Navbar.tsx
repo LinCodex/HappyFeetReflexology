@@ -213,7 +213,13 @@ const Navbar: React.FC = () => {
           </div>
 
           {/* Mobile Toggle */}
-          <div className="md:hidden flex items-center gap-4">
+          <div className="md:hidden flex items-center gap-3">
+            <a href="tel:8455918888" className={`flex items-center justify-center w-10 h-10 rounded-full transition-colors ${isScrolled ? 'text-black bg-stone-100' : 'text-white bg-white/10'}`} aria-label="Call">
+              <Phone size={18} />
+            </a>
+            <a href="sms:8455918888" className={`flex items-center justify-center w-10 h-10 rounded-full transition-colors ${isScrolled ? 'text-black bg-stone-100' : 'text-white bg-white/10'}`} aria-label="Text">
+              <MessageSquare size={18} />
+            </a>
             <button
               className={`w-12 h-12 flex items-center justify-center rounded-full transition-all duration-300 ${isScrolled ? 'bg-stone-100 text-black' : 'bg-white/10 text-white'} ${mobileMenuOpen ? 'opacity-0 pointer-events-none rotate-90 scale-50' : 'opacity-100 rotate-0 scale-100'}`}
               onClick={() => setMobileMenuOpen(true)}

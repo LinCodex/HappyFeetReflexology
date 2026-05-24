@@ -3,10 +3,8 @@ import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import About from './components/About';
 import Services from './components/Services';
-import BookingSection from './components/BookingSection';
 import Footer from './components/Footer';
 import GrandOpeningBanner from './components/GrandOpeningBanner';
-import QuickAccess from './components/QuickAccess';
 import { LanguageProvider } from './contexts/LanguageContext';
 
 const App: React.FC = () => {
@@ -36,7 +34,6 @@ const App: React.FC = () => {
         <About />
         <Services onServiceSelect={handleServiceSelect} />
         <BookingSection initialServiceId={preSelectedServiceId} />
-        <QuickAccess />
         <Footer />
       </div>
     </LanguageProvider>
