@@ -53,11 +53,11 @@ const GrandOpeningBanner: React.FC = () => {
           }}
         />
 
-        <div className="relative flex items-center justify-center px-4 py-5 md:py-6">
+        <div className="relative flex items-center justify-center px-4 py-4 md:py-6">
           {/* Content */}
-          <div className="flex items-center gap-3 md:gap-6">
+          <div className="flex flex-col md:flex-row items-center gap-3 md:gap-6 pr-6 md:pr-10 text-center">
             {/* Text content */}
-            <div className="flex items-center gap-2 md:gap-4 flex-wrap justify-center">
+            <div className="flex items-center gap-1.5 md:gap-4 flex-wrap justify-center">
               <span className="text-pink-200/80 text-[9px] md:text-[10px] uppercase tracking-[0.3em] font-bold">
                 ✦
               </span>
@@ -93,10 +93,10 @@ const GrandOpeningBanner: React.FC = () => {
           {/* Close button */}
           <button
             onClick={handleDismiss}
-            className="absolute right-3 md:right-5 top-1/2 -translate-y-1/2 text-pink-400/60 hover:text-white transition-colors p-1 rounded-full hover:bg-white/10"
+            className="absolute right-3 top-3 md:top-1/2 md:-translate-y-1/2 text-pink-400/60 hover:text-white transition-colors p-1.5 rounded-full hover:bg-white/10"
             aria-label="Dismiss banner"
           >
-            <X size={14} />
+            <X size={16} />
           </button>
         </div>
       </div>
