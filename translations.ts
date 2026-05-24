@@ -73,6 +73,13 @@ export const translations = {
       sun: "Sunday",
       priority: "Appointments Priority",
       rights: "© 2024 Happy Feet Reflexology. All rights reserved."
+    },
+    banner: {
+      grandOpening: "Grand Opening",
+      promotion: "Promotion",
+      date: "May 28, 2026",
+      viewPromotion: "View Promotion",
+      reserveNow: "Reserve Now"
     }
   },
   zh: {
@@ -149,6 +156,13 @@ export const translations = {
       sun: "周日",
       priority: "预约优先",
       rights: "© 2024 Happy Feet Reflexology. 保留所有权利。"
+    },
+    banner: {
+      grandOpening: "盛大开业",
+      promotion: "优惠活动",
+      date: "2026年5月28日",
+      viewPromotion: "查看优惠",
+      reserveNow: "立即预约"
     }
   }
 };
