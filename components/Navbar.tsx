@@ -215,12 +215,6 @@ const Navbar: React.FC = () => {
           {/* Mobile Toggle */}
           <div className="md:hidden flex items-center gap-4">
             <button
-              onClick={toggleLanguage}
-              className={`w-12 h-12 flex items-center justify-center rounded-full transition-colors font-bold text-xs uppercase tracking-widest ${isScrolled ? 'text-black bg-stone-100' : 'text-white bg-white/10'}`}
-            >
-              {language === 'en' ? 'CN' : 'EN'}
-            </button>
-            <button
               className={`w-12 h-12 flex items-center justify-center rounded-full transition-all duration-300 ${isScrolled ? 'bg-stone-100 text-black' : 'bg-white/10 text-white'} ${mobileMenuOpen ? 'opacity-0 pointer-events-none rotate-90 scale-50' : 'opacity-100 rotate-0 scale-100'}`}
               onClick={() => setMobileMenuOpen(true)}
             >
@@ -232,7 +226,7 @@ const Navbar: React.FC = () => {
 
       {/* Mobile Menu Overlay */}
       {mobileMenuOpen && (
-        <div className="fixed inset-0 bg-white z-[60] flex flex-col items-center justify-center gap-10 animate-fade-in md:hidden">
+        <div className="fixed inset-0 bg-white z-[250] flex flex-col items-center justify-center gap-8 animate-fade-in md:hidden">
           <div className="h-40 mb-4">
             <img src="/logo.png" alt="Logo" className="h-full w-auto" />
           </div>
@@ -242,29 +236,20 @@ const Navbar: React.FC = () => {
             <a href="#services" onClick={(e) => scrollToSection(e, 'services')} className="text-4xl font-serif text-stone-400 hover:text-black transition-colors">{t.nav.treatments}</a>
           </div>
 
-          <div className="w-16 h-[1px] bg-stone-100"></div>
+          <div className="w-16 h-[1px] bg-stone-100 my-4"></div>
 
-          {/* Mobile Quick Actions */}
-          <div className="flex items-center gap-6">
-            <a href="tel:8455918888" className="flex flex-col items-center gap-2 group">
-              <div className="w-14 h-14 rounded-full bg-stone-50 border border-stone-100 flex items-center justify-center text-stone-600 group-hover:bg-black group-hover:text-white transition-all">
-                <Phone size={20} />
-              </div>
-              <span className="text-[10px] uppercase tracking-widest font-bold text-stone-400">{t.nav.call}</span>
-            </a>
-            <a href="sms:8455918888" className="flex flex-col items-center gap-2 group">
-              <div className="w-14 h-14 rounded-full bg-stone-50 border border-stone-100 flex items-center justify-center text-stone-600 group-hover:bg-black group-hover:text-white transition-all">
-                <MessageSquare size={20} />
-              </div>
-              <span className="text-[10px] uppercase tracking-widest font-bold text-stone-400">{t.nav.text}</span>
-            </a>
-            <a href="https://www.google.com/maps/dir/?api=1&destination=2521+B+South+Rd,+Poughkeepsie,+NY+12601" target="_blank" rel="noreferrer" className="flex flex-col items-center gap-2 group">
-              <div className="w-14 h-14 rounded-full bg-stone-50 border border-stone-100 flex items-center justify-center text-stone-600 group-hover:bg-black group-hover:text-white transition-all">
-                <MapPin size={20} />
-              </div>
-              <span className="text-[10px] uppercase tracking-widest font-bold text-stone-400">{t.nav.maps}</span>
-            </a>
-          </div>
+          {/* Language Toggle in Mobile Menu */}
+          <button
+            onClick={toggleLanguage}
+            className="flex items-center gap-3 text-stone-600 bg-stone-100 hover:bg-stone-200 px-8 py-3 rounded-full transition-colors"
+          >
+            <Globe size={20} />
+            <span className="text-sm font-bold tracking-widest uppercase">
+              {language === 'en' ? 'Switch to 中文' : 'Switch to English'}
+            </span>
+          </button>
+
+
 
           <a href="#consultation" onClick={(e) => scrollToSection(e, 'consultation')} className="px-12 py-5 bg-black rounded-full text-white uppercase tracking-widest font-bold text-sm shadow-2xl mt-4">
             {t.nav.book}
