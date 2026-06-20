@@ -16,13 +16,7 @@ const GrandOpeningBanner: React.FC = () => {
 
   const scrollToBooking = (e: React.MouseEvent) => {
     e.preventDefault();
-    const element = document.getElementById('consultation');
-    if (element) {
-      const offset = 100;
-      const elementPosition = element.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.pageYOffset - offset;
-      window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
-    }
+    window.open("https://business.joinsmiley.com/Poughkeepsie-Happy-Feet-Reflexology-oERpY/book-now?rwg_token=AE37R_jMjpZktxas8wxYkmDQ3NByDbLZkVP4uk1A__7g5JEvOsu7oHMFdYPILC2ip5KDUoWo-EBWW83_lswqBRZWjlv0jLQL2g%3D%3D", "_blank", "noopener,noreferrer");
   };
 
   if (!isRendered) return null;

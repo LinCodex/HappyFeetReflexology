@@ -150,7 +150,6 @@ const Navbar: React.FC = () => {
             {/* Navigation Links */}
             <div className={`flex items-center gap-8 mr-8 transition-all duration-500 ${isScrolled ? 'translate-x-0' : 'translate-x-0'}`}>
               <a href="#about" onClick={(e) => scrollToSection(e, 'about')} className={`text-[11px] uppercase tracking-[0.25em] font-bold hover:text-pink-400 transition-colors ${isScrolled ? 'text-stone-600' : 'text-white'}`}>{t.nav.about}</a>
-              <a href="#services" onClick={(e) => scrollToSection(e, 'services')} className={`text-[11px] uppercase tracking-[0.25em] font-bold hover:text-pink-400 transition-colors ${isScrolled ? 'text-stone-600' : 'text-white'}`}>{t.nav.treatments}</a>
             </div>
 
             {/* Divider */}
@@ -198,8 +197,9 @@ const Navbar: React.FC = () => {
 
             {/* CTA Button */}
             <a
-              href="#consultation"
-              onClick={(e) => scrollToSection(e, 'consultation')}
+              href="https://business.joinsmiley.com/Poughkeepsie-Happy-Feet-Reflexology-oERpY/book-now?rwg_token=AE37R_jMjpZktxas8wxYkmDQ3NByDbLZkVP4uk1A__7g5JEvOsu7oHMFdYPILC2ip5KDUoWo-EBWW83_lswqBRZWjlv0jLQL2g%3D%3D"
+              target="_blank"
+              rel="noopener noreferrer"
               className={`
                 px-8 py-3 rounded-full text-[11px] uppercase tracking-[0.25em] font-bold transition-all shadow-lg
                 ${isScrolled
@@ -242,7 +242,6 @@ const Navbar: React.FC = () => {
 
           <div className="flex flex-col items-center gap-8">
             <a href="#about" onClick={(e) => scrollToSection(e, 'about')} className="text-4xl font-serif text-stone-400 hover:text-black transition-colors">{t.nav.story}</a>
-            <a href="#services" onClick={(e) => scrollToSection(e, 'services')} className="text-4xl font-serif text-stone-400 hover:text-black transition-colors">{t.nav.treatments}</a>
           </div>
 
           <div className="w-16 h-[1px] bg-stone-100 my-4"></div>
@@ -260,7 +259,7 @@ const Navbar: React.FC = () => {
 
 
 
-          <a href="#consultation" onClick={(e) => scrollToSection(e, 'consultation')} className="px-12 py-5 bg-black rounded-full text-white uppercase tracking-widest font-bold text-sm shadow-2xl mt-4">
+          <a href="https://business.joinsmiley.com/Poughkeepsie-Happy-Feet-Reflexology-oERpY/book-now?rwg_token=AE37R_jMjpZktxas8wxYkmDQ3NByDbLZkVP4uk1A__7g5JEvOsu7oHMFdYPILC2ip5KDUoWo-EBWW83_lswqBRZWjlv0jLQL2g%3D%3D" target="_blank" rel="noopener noreferrer" className="px-12 py-5 bg-black rounded-full text-white uppercase tracking-widest font-bold text-sm shadow-2xl mt-4">
             {t.nav.book}
           </a>
 
