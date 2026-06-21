@@ -69,15 +69,14 @@ export const translations = {
       desc: "Providing professional reflexology and scalp treatments in Poughkeepsie, NY.",
       connect: "Connect",
       hours: "Hours",
-      mon_sat: "Mon – Sat",
-      sun: "Sunday",
+      everyday: "Every Day",
       priority: "Appointments Priority",
       rights: "© 2024 Happy Feet Reflexology. All rights reserved."
     },
     banner: {
-      grandOpening: "Grand Opening",
-      promotion: "Promotion",
-      date: "May 28, 2026",
+      grandOpening: "Limited Promotion",
+      promotion: "Ending Soon",
+      date: "Ends 7/31",
       viewPromotion: "View Promotion",
       reserveNow: "Reserve Now"
     }
@@ -152,15 +151,14 @@ export const translations = {
       desc: "我们在纽约州 Poughkeepsie 提供专业的反射疗法和头疗服务。",
       connect: "联系方式",
       hours: "营业时间",
-      mon_sat: "周一 至 周六",
-      sun: "周日",
+      everyday: "每天",
       priority: "预约优先",
       rights: "© 2024 Happy Feet Reflexology. 保留所有权利。"
     },
     banner: {
-      grandOpening: "盛大开业",
-      promotion: "优惠活动",
-      date: "2026年5月28日",
+      grandOpening: "限时优惠",
+      promotion: "即将结束",
+      date: "截止 7/31",
       viewPromotion: "查看优惠",
       reserveNow: "立即预约"
     }

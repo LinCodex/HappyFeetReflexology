@@ -43,12 +43,8 @@ const Footer: React.FC = () => {
             <h4 className="text-white font-serif text-2xl">{t.footer.hours}</h4>
             <div className="space-y-3 text-sm font-light text-pink-200/80">
               <div className="flex justify-between border-b border-pink-900/30 pb-2">
-                <span>{t.footer.mon_sat}</span>
+                <span>{t.footer.everyday}</span>
                 <span className="text-white font-bold tracking-widest">10:00 AM – 9:00 PM</span>
-              </div>
-              <div className="flex justify-between border-b border-pink-900/30 pb-2">
-                <span>{t.footer.sun}</span>
-                <span className="text-white font-bold tracking-widest">10:00 AM – 8:00 PM</span>
               </div>
               <p className="text-pink-400 text-[9px] mt-4 uppercase tracking-[0.3em] font-bold">{t.footer.priority}</p>
             </div>
