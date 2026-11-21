@@ -1,32 +1,50 @@
 export const translations = {
   en: {
     nav: {
+      skipToContent: "Skip to main content",
       about: "About",
       treatments: "Treatments",
-      book: "Book Now",
+      book: "Book now",
       call: "Call",
       text: "Text",
-      maps: "Maps",
-      story: "Our Story"
+      maps: "Directions",
+      story: "Our practice",
+      menu: "Menu",
+      closeMenu: "Close menu",
+      switchLang: "中文",
+      switchLangAria: "Switch language to Chinese"
     },
     hero: {
-      est: "Est. Poughkeepsie, NY",
-      happy: "Happy",
-      feet: "Feet",
-      desc: "Professional scalp and foot reflexology in Poughkeepsie.",
-      subDesc: "Relax and restore balance with our expert massage treatments. We provide a peaceful environment for you to unwind.",
-      scroll: "Scroll Down"
+      est: "Poughkeepsie, NY",
+      headlineLine1: "Scalp spa & foot reflexology",
+      headlineLine2: "in Poughkeepsie",
+      desc: "Quiet, restorative scalp treatments and targeted foot reflexology to ease tension and restore balance.",
+      bookCta: "Book an appointment",
+      callCta: "Call (845) 591-8888",
+      hoursBrief: "Open daily, 10:00 AM – 9:00 PM",
+      addressBrief: "2521 B South Rd",
+      pauseVideo: "Pause video",
+      playVideo: "Play video",
+      videoTitle: "Happy Feet Reflexology studio ambiance video"
     },
     about: {
-      quote: "\"Best foot massage in Poughkeepsie.\"",
-      customer: "Google Review",
-      badge: "Experienced Therapists",
-      title1: "Relax Your Body,",
-      title2: "Revitalize Your Sole.",
+      opener: "Our practice",
+      title: "Relax your body, revitalize your sole",
       p1: "At Happy Feet Reflexology, we specialize in scalp and foot massage techniques that help relieve tension and improve circulation. Our practitioners use precise techniques to target pressure points that correspond to every organ and system in your body.",
       p2: "Conveniently located in Poughkeepsie, NY, we offer a quiet escape from your busy day. Our goal is to help you feel refreshed and energized through our dedicated treatments.",
-      statTitle: "Recommended Locally",
-      statSub: "Highly Rated in Poughkeepsie"
+      quote: "Best foot massage in Poughkeepsie.",
+      quoteAuthor: "Google Review",
+      quoteLocation: "Highly rated in Poughkeepsie",
+      starsLabel: "5 out of 5 stars",
+      scalpAlt: "Therapist performing a soothing scalp spa treatment against a warm terracotta studio wall",
+      footAlt: "Foot reflexology massage on a slate-blue towel beside a warm wooden aroma tray",
+      hoursLabel: "Hours",
+      hoursValue: "Every day, 10:00 AM – 9:00 PM",
+      hoursNote: "Appointments prioritized",
+      locationLabel: "Location",
+      locationValue: "2521 B South Rd, Poughkeepsie, NY 12601",
+      directionsLink: "Get directions",
+      bookLink: "Book an appointment"
     },
     services: {
       menu: "Menu",
@@ -66,49 +84,63 @@ export const translations = {
       book_another: "Book Another"
     },
     footer: {
-      desc: "Providing professional reflexology and scalp treatments in Poughkeepsie, NY.",
-      connect: "Connect",
+      desc: "Scalp spa treatments and foot reflexology in Poughkeepsie, NY.",
+      connect: "Visit & contact",
       hours: "Hours",
-      everyday: "Every Day",
-      priority: "Appointments Priority",
-      rights: "© 2024 Happy Feet Reflexology. All rights reserved."
-    },
-    banner: {
-      grandOpening: "Limited Promotion",
-      promotion: "Ending Soon",
-      date: "Ends 7/31",
-      viewPromotion: "View Promotion",
-      reserveNow: "Reserve Now"
+      everyday: "Every day",
+      priority: "Appointments prioritized",
+      textLabel: "Text (845) 591-8888",
+      bookCta: "Book an appointment",
+      rights: "© 2026 Happy Feet Reflexology",
+      cityNote: "Poughkeepsie, New York"
     }
   },
   zh: {
     nav: {
+      skipToContent: "跳至主要内容",
       about: "关于我们",
       treatments: "疗程服务",
-      book: "立即预约",
+      book: "预约疗程",
       call: "致电",
       text: "短信",
       maps: "导航",
-      story: "品牌故事"
+      story: "关于我们",
+      menu: "菜单",
+      closeMenu: "关闭菜单",
+      switchLang: "English",
+      switchLangAria: "切换语言为英文"
     },
     hero: {
       est: "纽约州 Poughkeepsie",
-      happy: "快乐",
-      feet: "足道",
-      desc: "Poughkeepsie 专业头疗与足疗服务。",
-      subDesc: "通过专业的按摩服务放松身心，恢复平衡。我们为您提供宁静舒适的休息环境。",
-      scroll: "向下滑动"
+      headlineLine1: "专业头皮护理与",
+      headlineLine2: "足部反射疗法",
+      desc: "在宁静舒适的环境中，通过专业头皮护理与精准足部反射疗法，助您舒缓压力、恢复身心平衡。",
+      bookCta: "预约疗程",
+      callCta: "致电 (845) 591-8888",
+      hoursBrief: "每天营业 10:00 AM – 9:00 PM",
+      addressBrief: "2521 B South Rd",
+      pauseVideo: "暂停视频",
+      playVideo: "播放视频",
+      videoTitle: "Happy Feet Reflexology 店内环境视频"
     },
     about: {
-      quote: "\"Poughkeepsie 极好的按摩店。\"",
-      customer: "Google 评价",
-      badge: "经验丰富的技师",
-      title1: "放松身心，",
-      title2: "焕发活力。",
+      opener: "关于我们",
+      title: "放松身心，焕发活力",
       p1: "Happy Feet 提供专业的头疗和足部按摩服务，帮助您缓解压力，促进血液循环。我们的技师手法娴熟，精准按压穴位，通过经络调节身体健康。",
       p2: "我们位于纽约州 Poughkeepsie，交通便利。这里是您远离喧嚣、放松身心的理想去处，致力于让您在舒适的环境中重获活力。",
-      statTitle: "本地推荐",
-      statSub: "Poughkeepsie 高评分商家"
+      quote: "Poughkeepsie 极好的按摩店。",
+      quoteAuthor: "Google 评价",
+      quoteLocation: "Poughkeepsie 高评分商家",
+      starsLabel: "五星好评",
+      scalpAlt: "技师在温暖的陶土色墙面前为客人进行头皮护理",
+      footAlt: "技师在灰蓝色毛巾与木质香薰盘旁进行足部反射疗法",
+      hoursLabel: "营业时间",
+      hoursValue: "每天 10:00 AM – 9:00 PM",
+      hoursNote: "预约优先",
+      locationLabel: "门店地址",
+      locationValue: "2521 B South Rd, Poughkeepsie, NY 12601",
+      directionsLink: "查看导航",
+      bookLink: "在线预约"
     },
     services: {
       menu: "菜单",
@@ -148,19 +180,15 @@ export const translations = {
       book_another: "预约新的服务"
     },
     footer: {
-      desc: "我们在纽约州 Poughkeepsie 提供专业的反射疗法和头疗服务。",
+      desc: "在纽约州 Poughkeepsie 提供专业的头皮护理与足部反射疗法。",
       connect: "联系方式",
       hours: "营业时间",
       everyday: "每天",
       priority: "预约优先",
-      rights: "© 2024 Happy Feet Reflexology. 保留所有权利。"
-    },
-    banner: {
-      grandOpening: "限时优惠",
-      promotion: "即将结束",
-      date: "截止 7/31",
-      viewPromotion: "查看优惠",
-      reserveNow: "立即预约"
+      textLabel: "短信 (845) 591-8888",
+      bookCta: "预约疗程",
+      rights: "© 2026 Happy Feet Reflexology 保留所有权利",
+      cityNote: "纽约州 Poughkeepsie"
     }
   }
 };

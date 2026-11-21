@@ -1,73 +1,124 @@
 import React from 'react';
-import { Star } from 'lucide-react';
+import { Star, ArrowUpRight, MapPin } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
+
+const BOOKING_URL =
+  'https://business.joinsmiley.com/Poughkeepsie-Happy-Feet-Reflexology-oERpY/book-now?rwg_token=AE37R_jMjpZktxas8wxYkmDQ3NByDbLZkVP4uk1A__7g5JEvOsu7oHMFdYPILC2ip5KDUoWo-EBWW83_lswqBRZWjlv0jLQL2g%3D%3D';
+const MAPS_URL =
+  'https://www.google.com/maps/dir/?api=1&destination=2521+B+South+Rd,+Poughkeepsie,+NY+12601';
 
 const About: React.FC = () => {
   const { t } = useLanguage();
+  const cleanQuote = t.about.quote.replace(/^"|"$/g, '');
 
   return (
-    <section id="about" className="py-24 md:py-32 bg-white relative overflow-hidden">
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="flex flex-col lg:flex-row items-center gap-16 lg:gap-24">
-          
-          <div className="w-full lg:w-1/2 relative order-2 lg:order-1">
-             {/* TEAM_034: Use subtle terracotta/bronze ambient light blur */}
-             <div className="absolute -top-16 -left-16 w-80 h-80 bg-terracotta-100/30 rounded-full blur-[100px] -z-0"></div>
-             
-             <div className="relative z-10 group">
-               <div className="absolute inset-0 border border-black/5 translate-x-4 translate-y-4 rounded-3xl transition-transform group-hover:translate-x-6 group-hover:translate-y-6"></div>
-               <img 
-                  src="https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?auto=format&fit=crop&q=80&w=1000" 
-                  alt="Scalp Ritual" 
-                  className="w-full h-[500px] md:h-[650px] object-cover rounded-3xl shadow-xl transition-all duration-700 group-hover:scale-[1.02]"
+    <section id="about" className="py-20 md:py-28 bg-[#F7F4EE] border-t border-[#1F1B16]/8">
+      <div className="max-w-7xl mx-auto px-6 md:px-12">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+          {/* Authentic studio photography & structured review */}
+          <div className="lg:col-span-6 space-y-4">
+            <figure className="overflow-hidden rounded-[14px] border border-[#1F1B16]/10 bg-[#EFE9DF]">
+              <img
+                src="/ScalpTreatment.jpg"
+                alt={t.about.scalpAlt}
+                width={1500}
+                height={1875}
+                loading="lazy"
+                className="w-full aspect-[4/5] object-cover block"
+              />
+            </figure>
+
+            <div className="grid grid-cols-1 sm:grid-cols-12 gap-4 items-stretch">
+              <div className="sm:col-span-5 overflow-hidden rounded-[12px] border border-[#1F1B16]/10 bg-[#EFE9DF]">
+                <img
+                  src="/FootReflexology.png"
+                  alt={t.about.footAlt}
+                  width={800}
+                  height={534}
+                  loading="lazy"
+                  className="w-full h-full min-h-[180px] object-cover block"
                 />
-                <div className="absolute -bottom-8 -right-4 md:-bottom-12 md:-right-12 bg-black text-white p-8 md:p-10 rounded-2xl shadow-2xl max-w-[280px]">
-                   <div className="flex gap-1 mb-4">
-                     {/* TEAM_034: Set star reviews fill to rich logo bronze-gold (#C09E6B) instead of old hot pink */}
-                     {[1,2,3,4,5].map(i => <Star key={i} size={14} fill="#C09E6B" className="text-pink-400" />)}
-                   </div>
-                   <p className="font-serif text-2xl md:text-3xl leading-snug">{t.about.quote}</p>
-                   <p className="text-[10px] uppercase tracking-[0.3em] font-bold mt-4 text-pink-300">{t.about.customer}</p>
+              </div>
+
+              <div className="sm:col-span-7 rounded-[12px] border border-[#1F1B16]/10 bg-[#FDFBF7] p-6 flex flex-col justify-between gap-4">
+                <div className="flex items-center gap-1" role="img" aria-label={t.about.starsLabel}>
+                  {[1, 2, 3, 4, 5].map((star) => (
+                    <Star
+                      key={star}
+                      size={14}
+                      strokeWidth={1.5}
+                      fill="#8C6C3D"
+                      className="text-[#8C6C3D]"
+                      aria-hidden="true"
+                    />
+                  ))}
                 </div>
-             </div>
-          </div>
-          
-          <div className="w-full lg:w-1/2 order-1 lg:order-2">
-            <div className="inline-block px-3 py-1 bg-pink-50 rounded-full mb-6">
-              <span className="text-pink-500 uppercase tracking-[0.3em] text-[10px] font-bold">{t.about.badge}</span>
+
+                <blockquote className="font-display text-[22px] md:text-[24px] leading-[1.25] text-[#1F1B16]">
+                  “{cleanQuote}”
+                </blockquote>
+
+                <div className="space-y-0.5">
+                  <p className="text-[13px] font-medium text-[#574F45]">{t.about.quoteAuthor}</p>
+                  <p className="text-[13px] text-[#70665B]">{t.about.quoteLocation}</p>
+                </div>
+              </div>
             </div>
-            <h2 className="text-5xl md:text-6xl lg:text-7xl font-serif text-black mb-8 leading-[0.9]">
-              {t.about.title1} <br/>
-              <span className="italic text-stone-400">{t.about.title2}</span>
-            </h2>
-            
-            <div className="flex gap-8 mb-12">
-               <div className="w-[1.5px] bg-pink-200 h-32"></div>
-               <div className="space-y-6">
-                 <p className="text-stone-600 text-lg font-light leading-relaxed">
-                   {t.about.p1}
-                 </p>
-                 <p className="text-stone-500 text-base font-light leading-relaxed">
-                   {t.about.p2}
-                 </p>
-               </div>
+          </div>
+
+          {/* Editorial copy & verifiable studio details */}
+          <div className="lg:col-span-6 lg:sticky lg:top-24">
+            <div className="inline-flex items-center gap-3">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#8C6C3D]" aria-hidden="true" />
+              <span className="w-6 h-px bg-[#8C6C3D]/45" aria-hidden="true" />
+              <span className="text-[13px] font-medium text-[#8C6C3D]">{t.about.opener}</span>
             </div>
 
-            <div className="flex flex-wrap items-center gap-8 border-t border-stone-100 pt-10">
-               <div className="flex -space-x-3">
-                  {[1,2,3].map(i => (
-                    <div key={i} className="w-12 h-12 rounded-full border-4 border-white bg-stone-100 overflow-hidden shadow-sm">
-                       <img src={`https://i.pravatar.cc/100?img=${i + 20}`} className="w-full h-full object-cover grayscale" />
-                    </div>
-                  ))}
-                  <div className="w-12 h-12 rounded-full border-4 border-white bg-pink-400 text-black flex items-center justify-center text-[10px] font-bold shadow-sm">
-                    50+
-                  </div>
-               </div>
-               <div>
-                 <p className="font-serif text-xl text-black leading-tight">{t.about.statTitle}</p>
-                 <p className="text-[10px] uppercase tracking-widest text-pink-500 font-bold">{t.about.statSub}</p>
-               </div>
+            <h2 className="font-display font-normal text-[#1F1B16] text-[36px] md:text-[48px] leading-[1.08] tracking-[-0.02em] mt-4">
+              {t.about.title}
+            </h2>
+
+            <div className="mt-6 space-y-4 text-[16px] leading-[1.65] text-[#574F45] max-w-[54ch]">
+              <p>{t.about.p1}</p>
+              <p>{t.about.p2}</p>
+            </div>
+
+            <div className="mt-10 pt-8 border-t border-[#1F1B16]/10 grid grid-cols-1 sm:grid-cols-2 gap-6">
+              <div>
+                <div className="text-[13px] font-medium text-[#70665B]">{t.about.hoursLabel}</div>
+                <p className="mt-1.5 text-[15px] font-medium text-[#1F1B16] tabular-nums">
+                  {t.about.hoursValue}
+                </p>
+                <p className="mt-1 text-[13px] text-[#70665B]">{t.about.hoursNote}</p>
+              </div>
+
+              <div>
+                <div className="text-[13px] font-medium text-[#70665B]">{t.about.locationLabel}</div>
+                <p className="mt-1.5 text-[15px] font-medium text-[#1F1B16]">
+                  {t.about.locationValue}
+                </p>
+                <a
+                  href={MAPS_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-1.5 inline-flex items-center gap-1.5 text-[13px] font-medium text-[#B54D26] hover:text-[#9C401D] underline-offset-4 hover:underline transition-colors duration-150"
+                >
+                  <MapPin size={14} strokeWidth={1.5} aria-hidden="true" />
+                  <span>{t.about.directionsLink}</span>
+                </a>
+              </div>
+            </div>
+
+            <div className="mt-8 flex flex-wrap items-center gap-4">
+              <a
+                href={BOOKING_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="h-11 px-5 rounded-[8px] bg-[#B54D26] hover:bg-[#9C401D] text-[#FDFBF7] text-[14px] font-medium inline-flex items-center gap-2 transition-[background-color,transform] duration-150 active:scale-[0.98]"
+              >
+                <span>{t.about.bookLink}</span>
+                <ArrowUpRight size={16} strokeWidth={1.5} aria-hidden="true" />
+              </a>
             </div>
           </div>
         </div>

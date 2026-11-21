@@ -1,10 +1,36 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { Menu, X, Phone, MessageSquare, MapPin, Globe } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 
+const BOOKING_URL =
+  'https://business.joinsmiley.com/Poughkeepsie-Happy-Feet-Reflexology-oERpY/book-now?rwg_token=AE37R_jMjpZktxas8wxYkmDQ3NByDbLZkVP4uk1A__7g5JEvOsu7oHMFdYPILC2ip5KDUoWo-EBWW83_lswqBRZWjlv0jLQL2g%3D%3D';
+const MAPS_URL =
+  'https://www.google.com/maps/dir/?api=1&destination=2521+B+South+Rd,+Poughkeepsie,+NY+12601';
+
+let supportsDisplayTransition: boolean | undefined;
+
+function canTransitionDisplay(): boolean {
+  if (supportsDisplayTransition !== undefined) return supportsDisplayTransition;
+  if (!window.CSS?.supports?.('transition-behavior', 'allow-discrete') || !document.body) {
+    return false;
+  }
+  const probe = document.createElement('div');
+  probe.style.cssText = 'transition: display 1s allow-discrete !important; display: block;';
+  document.body.appendChild(probe);
+  getComputedStyle(probe).display;
+  probe.style.display = 'none';
+  supportsDisplayTransition = getComputedStyle(probe).display === 'block';
+  probe.remove();
+  return supportsDisplayTransition;
+}
+
+function supportsTopLayerExit(): boolean {
+  return window.CSS?.supports?.('overlay', 'auto') && canTransitionDisplay();
+}
+
 const Navbar: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const dialogRef = useRef<HTMLDialogElement>(null);
   const { t, language, setLanguage } = useLanguage();
 
   useEffect(() => {
@@ -13,7 +39,6 @@ const Navbar: React.FC = () => {
       if (!ticking) {
         window.requestAnimationFrame(() => {
           const currentScrollY = window.scrollY;
-          // Hysteresis: switch to scrolled at 50, switch back to top at 20
           if (currentScrollY > 50) {
             setIsScrolled(true);
           } else if (currentScrollY < 20) {
@@ -25,61 +50,108 @@ const Navbar: React.FC = () => {
       }
     };
 
-    // Add passive listener for better scroll performance
+    handleScroll();
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Lock body scroll when mobile menu is open
-  useEffect(() => {
-    if (mobileMenuOpen) {
-      document.body.style.overflow = 'hidden';
-      document.documentElement.style.overflow = 'hidden';
-      document.body.style.touchAction = 'none';
-      document.documentElement.style.touchAction = 'none';
-    } else {
-      document.body.style.overflow = '';
-      document.documentElement.style.overflow = '';
-      document.body.style.touchAction = '';
-      document.documentElement.style.touchAction = '';
-    }
-    return () => {
-      document.body.style.overflow = '';
-      document.documentElement.style.overflow = '';
-      document.body.style.touchAction = '';
-      document.documentElement.style.touchAction = '';
-    };
-  }, [mobileMenuOpen]);
+  const closeMenu = useCallback(async () => {
+    const dialog = dialogRef.current;
+    if (!dialog || !dialog.open) return;
 
-  // Close mobile menu on resize to desktop to prevent scroll lock
+    if (!supportsTopLayerExit()) {
+      dialog.setAttribute('data-closing', '');
+      const animations = dialog.getAnimations({ subtree: true });
+      if (animations.length > 0) {
+        await Promise.race([
+          Promise.allSettled(animations.map((animation) => animation.finished)),
+          new Promise((resolve) => setTimeout(resolve, 600)),
+        ]);
+      }
+      if (!dialog.hasAttribute('data-closing')) return;
+      dialog.removeAttribute('data-closing');
+    }
+
+    if (dialog.open) {
+      dialog.close();
+    }
+  }, []);
+
+  const openMenu = () => {
+    const dialog = dialogRef.current;
+    if (!dialog || dialog.open) return;
+    dialog.removeAttribute('data-closing');
+    dialog.showModal();
+  };
+
   useEffect(() => {
+    const dialog = dialogRef.current;
+    if (!dialog) return;
+
+    const handleCancel = (event: Event) => {
+      event.preventDefault();
+      void closeMenu();
+    };
+
+    dialog.addEventListener('cancel', handleCancel);
+
+    let cleanupLightDismiss: (() => void) | undefined;
+    if (!('closedBy' in HTMLDialogElement.prototype)) {
+      const isOutside = (event: PointerEvent) => {
+        const rect = dialog.getBoundingClientRect();
+        return (
+          event.clientX < rect.left ||
+          event.clientX > rect.right ||
+          event.clientY < rect.top ||
+          event.clientY > rect.bottom
+        );
+      };
+      let pressedOutside = false;
+      const handlePointerDown = (event: PointerEvent) => {
+        pressedOutside = isOutside(event);
+      };
+      const handlePointerUp = (event: PointerEvent) => {
+        if (pressedOutside && isOutside(event)) {
+          void closeMenu();
+        }
+        pressedOutside = false;
+      };
+      dialog.addEventListener('pointerdown', handlePointerDown);
+      dialog.addEventListener('pointerup', handlePointerUp);
+      cleanupLightDismiss = () => {
+        dialog.removeEventListener('pointerdown', handlePointerDown);
+        dialog.removeEventListener('pointerup', handlePointerUp);
+      };
+    }
+
     const handleResize = () => {
-      if (window.innerWidth >= 768) {
-        setMobileMenuOpen(false);
+      if (window.innerWidth >= 768 && dialog.open) {
+        dialog.removeAttribute('data-closing');
+        dialog.close();
       }
     };
-
     window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
+
+    return () => {
+      dialog.removeEventListener('cancel', handleCancel);
+      cleanupLightDismiss?.();
+      window.removeEventListener('resize', handleResize);
+    };
+  }, [closeMenu]);
 
   const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
     e.preventDefault();
     const element = document.getElementById(id);
     if (element) {
-      const offset = 100;
-      const elementPosition = element.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.pageYOffset - offset;
-
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: "smooth"
-      });
+      const offset = 64;
+      const top = element.getBoundingClientRect().top + window.scrollY - offset;
+      window.scrollTo({ top, behavior: 'smooth' });
     }
-    setMobileMenuOpen(false);
+    void closeMenu();
   };
 
-  const scrollToTop = () => {
+  const scrollToTop = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
@@ -87,188 +159,234 @@ const Navbar: React.FC = () => {
     setLanguage(language === 'en' ? 'zh' : 'en');
   };
 
-  // Action Button Component for consistency
-  const ActionButton = ({ icon: Icon, href, label }: { icon: any, href: string, label: string }) => (
-    <a
-      href={href}
-      target={href.startsWith('http') ? "_blank" : undefined}
-      rel={href.startsWith('http') ? "noopener noreferrer" : undefined}
-      className={`
-        group relative flex items-center justify-center w-10 h-10 rounded-full transition-colors duration-300
-        ${isScrolled
-          ? 'bg-stone-100 text-stone-600 hover:bg-black hover:text-white'
-          : 'bg-white/10 text-white hover:bg-white hover:text-black backdrop-blur-md'
-        }
-      `}
-      aria-label={label}
-    >
-      <Icon size={16} />
-      {/* Tooltip */}
-      <span className={`
-        absolute -bottom-8 left-1/2 -translate-x-1/2 text-[9px] font-bold uppercase tracking-widest px-2 py-1 rounded
-        opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap
-        ${isScrolled ? 'bg-black text-white' : 'bg-white text-black'}
-      `}>
-        {label}
-      </span>
-    </a>
-  );
+  const iconButtonClass = isScrolled
+    ? 'text-[#574F45] hover:text-[#1F1B16] hover:bg-[#EFE9DF]'
+    : 'text-[#EFE9DE]/85 hover:text-[#EFE9DE] hover:bg-[#EFE9DE]/10';
+
+  const tooltipClass = isScrolled
+    ? 'bg-[#181410] text-[#EFE9DE]'
+    : 'bg-[#FDFBF7] text-[#1F1B16]';
 
   return (
-    <>
+    <header>
+      <a href="#main-content" className="skip-link visually-hidden">
+        {t.nav.skipToContent}
+      </a>
+
       <nav
-        className={`fixed top-0 left-0 w-full z-50 pointer-events-none md:transition-[padding] md:duration-500 md:ease-[cubic-bezier(0.4,0,0.2,1)] flex justify-center transform-gpu will-change-transform ${isScrolled ? 'py-4' : 'py-6 md:py-8 lg:py-10'
-          }`}
+        aria-label="Primary"
+        data-surface={isScrolled ? 'light' : 'dark'}
+        className={`fixed top-0 left-0 w-full h-16 z-50 border-b transition-[background-color,border-color] duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] ${
+          isScrolled
+            ? 'bg-[#F7F4EE]/95 backdrop-blur-md border-[#1F1B16]/10 text-[#1F1B16]'
+            : 'bg-[#16120E]/35 backdrop-blur-sm border-[#EFE9DE]/10 text-[#EFE9DE]'
+        }`}
       >
-        <div
-          style={{ willChange: 'width, background-color, padding, border-radius, box-shadow' }}
-          className={`
-            pointer-events-auto md:transition-[width,background-color,padding,border-radius,box-shadow,border] md:duration-500 md:ease-[cubic-bezier(0.4,0,0.2,1)] flex justify-between items-center transform-gpu backface-hidden translate-z-0
-            ${isScrolled
-              ? 'w-[95%] md:w-[1100px] bg-white/60 backdrop-blur-3xl rounded-full px-6 md:px-8 md:pl-10 py-3 shadow-2xl border border-white/40 ring-1 ring-white/10'
-              : 'w-full max-w-7xl px-6 md:px-8 bg-transparent'
-            }
-          `}
-        >
-          {/* Logo Area - TEAM_034: The new Logo-removebg-preview is used here. Invert on dark hero, natural bronze on scrolled dock. */}
-          <div
-            className={`relative cursor-pointer group flex items-center md:transition-[height] md:duration-500 overflow-hidden ${isScrolled ? 'h-10 md:h-12 w-auto' : 'h-20 md:h-44 lg:h-56'
-              }`}
+        <div className="max-w-7xl mx-auto h-full px-6 md:px-12 flex items-center justify-between gap-4">
+          <a
+            href="#top"
             onClick={scrollToTop}
+            className="inline-flex items-center gap-3 py-1 rounded-[8px] shrink-0"
           >
             <img
               src="/logo.png"
-              alt="Happy Feet Reflexology Logo"
-              className={`h-full w-auto object-contain md:transition-all md:duration-700 transform-gpu ${isScrolled ? 'brightness-100 hover:scale-105' : 'brightness-0 invert hover:scale-105'
-                }`}
+              alt=""
+              width={500}
+              height={500}
+              className={`h-10 w-10 object-contain transition-[filter,opacity] duration-200 ${
+                isScrolled ? 'brightness-100 opacity-100' : 'brightness-0 invert opacity-95'
+              }`}
             />
-          </div>
+            <span className="text-[15px] font-medium tracking-normal whitespace-nowrap">
+              Happy Feet Reflexology
+            </span>
+          </a>
 
-          {/* Desktop Dock Actions */}
-          <div className="hidden md:flex items-center">
+          <div className="hidden md:flex items-center gap-2">
+            <a
+              href="#about"
+              onClick={(e) => scrollToSection(e, 'about')}
+              className={`px-3 py-2 rounded-[8px] text-[14px] font-medium transition-colors duration-150 ${
+                isScrolled
+                  ? 'text-[#574F45] hover:text-[#1F1B16] hover:bg-[#EFE9DF]'
+                  : 'text-[#EFE9DE]/85 hover:text-[#EFE9DE] hover:bg-[#EFE9DE]/10'
+              }`}
+            >
+              {t.nav.about}
+            </a>
 
-            {/* Navigation Links */}
-            <div className={`flex items-center gap-8 mr-8 transition-all duration-500 ${isScrolled ? 'translate-x-0' : 'translate-x-0'}`}>
-              <a href="#about" onClick={(e) => scrollToSection(e, 'about')} className={`text-[11px] uppercase tracking-[0.25em] font-bold hover:text-pink-400 transition-colors ${isScrolled ? 'text-stone-600' : 'text-white'}`}>{t.nav.about}</a>
-            </div>
+            <div
+              className={`w-px h-5 mx-1 ${isScrolled ? 'bg-[#1F1B16]/10' : 'bg-[#EFE9DE]/15'}`}
+              aria-hidden="true"
+            />
 
-            {/* Divider */}
-            <div className={`h-8 w-[1px] mx-2 transition-colors duration-500 ${isScrolled ? 'bg-stone-200' : 'bg-white/20'}`}></div>
+            <div className="flex items-center gap-1">
+              {[
+                { icon: Phone, href: 'tel:8455918888', label: t.nav.call, external: false },
+                { icon: MessageSquare, href: 'sms:8455918888', label: t.nav.text, external: false },
+                { icon: MapPin, href: MAPS_URL, label: t.nav.maps, external: true },
+              ].map(({ icon: Icon, href, label, external }) => (
+                <a
+                  key={label}
+                  href={href}
+                  target={external ? '_blank' : undefined}
+                  rel={external ? 'noopener noreferrer' : undefined}
+                  aria-label={label}
+                  className={`group relative flex items-center justify-center h-9 w-9 rounded-[8px] transition-colors duration-150 ${iconButtonClass}`}
+                >
+                  <Icon size={16} strokeWidth={1.5} aria-hidden="true" />
+                  <span
+                    className={`pointer-events-none absolute top-full mt-2 left-1/2 -translate-x-1/2 px-2 py-1 rounded-[6px] text-[12px] leading-none font-medium whitespace-nowrap opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100 transition-opacity duration-150 ${tooltipClass}`}
+                  >
+                    {label}
+                  </span>
+                </a>
+              ))}
 
-            {/* Quick Actions Group */}
-            <div className="flex items-center gap-3 mx-6">
-              <ActionButton
-                icon={Phone}
-                href="tel:8455918888"
-                label={t.nav.call}
-              />
-              <ActionButton
-                icon={MessageSquare}
-                href="sms:8455918888"
-                label={t.nav.text}
-              />
-              <ActionButton
-                icon={MapPin}
-                href="https://www.google.com/maps/dir/?api=1&destination=2521+B+South+Rd,+Poughkeepsie,+NY+12601"
-                label={t.nav.maps}
-              />
-              {/* Language Switcher */}
               <button
+                type="button"
                 onClick={toggleLanguage}
-                className={`
-                  group relative flex items-center justify-center w-10 h-10 rounded-full transition-all duration-300
-                  ${isScrolled
-                    ? 'bg-stone-100 text-stone-600 hover:bg-black hover:text-white'
-                    : 'bg-white/10 text-white hover:bg-white hover:text-black backdrop-blur-md'
-                  }
-                `}
-                aria-label="Switch Language"
+                aria-label={`${t.nav.switchLang} (${t.nav.switchLangAria})`}
+                className={`inline-flex items-center gap-1.5 h-9 px-3 rounded-[8px] text-[13px] font-medium transition-[background-color,color,transform] duration-150 active:scale-[0.98] ${iconButtonClass}`}
               >
-                <Globe size={16} />
-                <span className={`
-                  absolute -bottom-8 left-1/2 -translate-x-1/2 text-[9px] font-bold uppercase tracking-widest px-2 py-1 rounded
-                  opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap
-                  ${isScrolled ? 'bg-black text-white' : 'bg-white text-black'}
-                `}>
-                  {language === 'en' ? '中文' : 'EN'}
-                </span>
+                <Globe size={15} strokeWidth={1.5} aria-hidden="true" />
+                <span>{t.nav.switchLang}</span>
               </button>
             </div>
 
-            {/* CTA Button */}
             <a
-              href="https://business.joinsmiley.com/Poughkeepsie-Happy-Feet-Reflexology-oERpY/book-now?rwg_token=AE37R_jMjpZktxas8wxYkmDQ3NByDbLZkVP4uk1A__7g5JEvOsu7oHMFdYPILC2ip5KDUoWo-EBWW83_lswqBRZWjlv0jLQL2g%3D%3D"
+              href={BOOKING_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className={`
-                px-8 py-3 rounded-full text-[11px] uppercase tracking-[0.25em] font-bold transition-all shadow-lg
-                ${isScrolled
-                  ? 'bg-black text-white hover:bg-pink-400 hover:text-black hover:shadow-pink-200/50'
-                  : 'bg-white text-black border border-white hover:bg-pink-400 hover:border-pink-400'
-                }
-              `}
+              className={`ml-1 h-9 px-4 rounded-[8px] text-[14px] font-medium inline-flex items-center transition-[background-color,color,transform] duration-150 active:scale-[0.98] ${
+                isScrolled
+                  ? 'bg-[#B54D26] text-[#FDFBF7] hover:bg-[#9C401D]'
+                  : 'bg-[#EFE9DE] text-[#181410] hover:bg-white'
+              }`}
             >
               {t.nav.book}
             </a>
           </div>
 
-          {/* Mobile Toggle */}
-          <div className="md:hidden flex items-center gap-2">
-            <a href="tel:8455918888" className={`flex items-center justify-center w-9 h-9 rounded-full transition-colors ${isScrolled ? 'text-black bg-stone-100' : 'text-white bg-white/10'}`} aria-label="Call">
-              <Phone size={16} />
+          <div className="md:hidden flex items-center gap-1.5">
+            <a
+              href="tel:8455918888"
+              aria-label={t.nav.call}
+              className={`min-w-[40px] min-h-[40px] rounded-[8px] flex items-center justify-center transition-colors duration-150 ${iconButtonClass}`}
+            >
+              <Phone size={17} strokeWidth={1.5} aria-hidden="true" />
             </a>
-            <a href="sms:8455918888" className={`flex items-center justify-center w-9 h-9 rounded-full transition-colors ${isScrolled ? 'text-black bg-stone-100' : 'text-white bg-white/10'}`} aria-label="Text">
-              <MessageSquare size={16} />
-            </a>
-            <a href="https://www.google.com/maps/dir/?api=1&destination=2521+B+South+Rd,+Poughkeepsie,+NY+12601" target="_blank" rel="noopener noreferrer" className={`flex items-center justify-center w-9 h-9 rounded-full transition-colors ${isScrolled ? 'text-black bg-stone-100' : 'text-white bg-white/10'}`} aria-label="Navigate">
-              <MapPin size={16} />
+            <a
+              href={MAPS_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={t.nav.maps}
+              className={`min-w-[40px] min-h-[40px] rounded-[8px] flex items-center justify-center transition-colors duration-150 ${iconButtonClass}`}
+            >
+              <MapPin size={17} strokeWidth={1.5} aria-hidden="true" />
             </a>
             <button
-              className={`w-12 h-12 flex items-center justify-center rounded-full transition-all duration-300 ${isScrolled ? 'bg-stone-100 text-black' : 'bg-white/10 text-white'} ${mobileMenuOpen ? 'opacity-0 pointer-events-none rotate-90 scale-50' : 'opacity-100 rotate-0 scale-100'}`}
-              onClick={() => setMobileMenuOpen(true)}
+              type="button"
+              onClick={openMenu}
+              aria-label={t.nav.menu}
+              className={`min-w-[40px] min-h-[40px] rounded-[8px] flex items-center justify-center transition-colors duration-150 ${iconButtonClass}`}
             >
-              <Menu size={24} />
+              <Menu size={18} strokeWidth={1.5} aria-hidden="true" />
             </button>
           </div>
         </div>
       </nav>
 
-      {/* Mobile Menu Overlay */}
-      {mobileMenuOpen && (
-        <div className="fixed inset-0 bg-white z-[250] flex flex-col items-center justify-center gap-8 animate-fade-in md:hidden">
-          <div className="h-40 mb-4">
-            <img src="/logo.png" alt="Logo" className="h-full w-auto" />
+      <dialog
+        ref={dialogRef}
+        className="mobile-nav-dialog"
+        aria-labelledby="mobile-nav-title"
+        {...({ closedby: 'any' } as Record<string, string>)}
+      >
+        <div className="flex items-center justify-between h-16 px-6 border-b border-[#1F1B16]/10 shrink-0">
+          <div className="flex items-center gap-2.5">
+            <img
+              src="/logo.png"
+              alt=""
+              width={500}
+              height={500}
+              className="h-8 w-8 object-contain"
+            />
+            <h2 id="mobile-nav-title" className="text-[15px] font-medium text-[#1F1B16]">
+              Happy Feet Reflexology
+            </h2>
           </div>
-
-          <div className="flex flex-col items-center gap-8">
-            <a href="#about" onClick={(e) => scrollToSection(e, 'about')} className="text-4xl font-serif text-stone-400 hover:text-black transition-colors">{t.nav.story}</a>
-          </div>
-
-          <div className="w-16 h-[1px] bg-stone-100 my-4"></div>
-
-          {/* Language Toggle in Mobile Menu */}
           <button
-            onClick={toggleLanguage}
-            className="flex items-center gap-3 text-stone-600 bg-stone-100 hover:bg-stone-200 px-8 py-3 rounded-full transition-colors"
+            type="button"
+            onClick={() => void closeMenu()}
+            aria-label={t.nav.closeMenu}
+            autoFocus
+            className="min-w-[40px] min-h-[40px] rounded-[8px] flex items-center justify-center text-[#574F45] hover:text-[#1F1B16] hover:bg-[#EFE9DF] transition-colors duration-150"
           >
-            <Globe size={20} />
-            <span className="text-sm font-bold tracking-widest uppercase">
-              {language === 'en' ? 'Switch to 中文' : 'Switch to English'}
-            </span>
-          </button>
-
-
-
-          <a href="https://business.joinsmiley.com/Poughkeepsie-Happy-Feet-Reflexology-oERpY/book-now?rwg_token=AE37R_jMjpZktxas8wxYkmDQ3NByDbLZkVP4uk1A__7g5JEvOsu7oHMFdYPILC2ip5KDUoWo-EBWW83_lswqBRZWjlv0jLQL2g%3D%3D" target="_blank" rel="noopener noreferrer" className="px-12 py-5 bg-black rounded-full text-white uppercase tracking-widest font-bold text-sm shadow-2xl mt-4">
-            {t.nav.book}
-          </a>
-
-          <button onClick={() => setMobileMenuOpen(false)} className="absolute top-8 right-8 text-stone-900 bg-stone-100 p-4 rounded-full hover:bg-pink-100 transition-colors">
-            <X size={32} />
+            <X size={18} strokeWidth={1.5} aria-hidden="true" />
           </button>
         </div>
-      )}
-    </>
+
+        <div className="flex-1 overflow-y-auto px-6 py-6 flex flex-col justify-between gap-8">
+          <div className="space-y-1">
+            <div className="pb-3 mb-2 border-b border-[#1F1B16]/10">
+              <a
+                href="#about"
+                onClick={(e) => scrollToSection(e, 'about')}
+                className="flex items-center justify-between px-3 py-3 rounded-[8px] text-[16px] font-medium text-[#1F1B16] hover:bg-[#EFE9DF] transition-colors duration-150"
+              >
+                <span>{t.nav.story}</span>
+              </a>
+            </div>
+            <a
+              href="tel:8455918888"
+              className="flex items-center gap-3 px-3 py-3 rounded-[8px] text-[15px] text-[#574F45] hover:text-[#1F1B16] hover:bg-[#EFE9DF] transition-colors duration-150 tabular-nums"
+            >
+              <Phone size={16} strokeWidth={1.5} aria-hidden="true" />
+              <span>{t.hero.callCta}</span>
+            </a>
+            <a
+              href="sms:8455918888"
+              className="flex items-center gap-3 px-3 py-3 rounded-[8px] text-[15px] text-[#574F45] hover:text-[#1F1B16] hover:bg-[#EFE9DF] transition-colors duration-150 tabular-nums"
+            >
+              <MessageSquare size={16} strokeWidth={1.5} aria-hidden="true" />
+              <span>{t.footer.textLabel}</span>
+            </a>
+            <a
+              href={MAPS_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-3 px-3 py-3 rounded-[8px] text-[15px] text-[#574F45] hover:text-[#1F1B16] hover:bg-[#EFE9DF] transition-colors duration-150"
+            >
+              <MapPin size={16} strokeWidth={1.5} aria-hidden="true" />
+              <span>{t.about.directionsLink}</span>
+            </a>
+          </div>
+
+          <div className="space-y-3 pt-6 border-t border-[#1F1B16]/10">
+            <button
+              type="button"
+              onClick={toggleLanguage}
+              aria-label={`${t.nav.switchLang} (${t.nav.switchLangAria})`}
+              className="w-full h-11 px-4 rounded-[8px] border border-[#1F1B16]/15 bg-[#F7F4EE] hover:bg-[#EFE9DF] text-[14px] font-medium text-[#1F1B16] inline-flex items-center justify-center gap-2 transition-[background-color,transform] duration-150 active:scale-[0.98]"
+            >
+              <Globe size={16} strokeWidth={1.5} aria-hidden="true" />
+              <span>{t.nav.switchLang}</span>
+            </button>
+
+            <a
+              href={BOOKING_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => void closeMenu()}
+              className="w-full h-11 px-4 rounded-[8px] bg-[#B54D26] hover:bg-[#9C401D] text-[#FDFBF7] text-[14px] font-medium inline-flex items-center justify-center transition-[background-color,transform] duration-150 active:scale-[0.98]"
+            >
+              {t.nav.book}
+            </a>
+          </div>
+        </div>
+      </dialog>
+    </header>
   );
 };
 

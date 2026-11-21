@@ -15,12 +15,19 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ chil
   const [language, setLanguage] = useState<Language>('en');
 
   useEffect(() => {
-    // Detect browser language
     const browserLang = navigator.language.toLowerCase();
     if (browserLang.startsWith('zh')) {
       setLanguage('zh');
     }
   }, []);
+
+  useEffect(() => {
+    document.documentElement.lang = language === 'zh' ? 'zh-Hans' : 'en';
+    document.title =
+      language === 'zh'
+        ? '快乐足道 Happy Feet Reflexology | Poughkeepsie'
+        : 'Happy Feet Reflexology | Poughkeepsie';
+  }, [language]);
 
   const t = translations[language];
 
